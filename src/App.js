@@ -38,7 +38,7 @@ class App extends React.Component {
         // FIRST FIGURE OUT WHAT THE NEW LIST'S KEY AND NAME WILL BE
         let newKey = this.state.sessionData.nextKey;
         let newName = "Untitled" + newKey;
-
+        let something = "some";
         // MAKE THE NEW LIST
         let newList = {
             key: newKey,
