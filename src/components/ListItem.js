@@ -3,9 +3,9 @@ import React from "react";
 export default class ListItem extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
             text: this.props.item,
+            listKey: this.props.lKey,
             editActive: false,
         }
     }
@@ -23,12 +23,13 @@ export default class ListItem extends React.Component {
         }
     }
     handleBlur = () => {
-        let key = this.props.index;
-        console.log(this.state.text);
+        let idx = this.props.index;
+        //console.log(this.state.text);
         let textValue = this.state.text;
+        //console.log(this.state.listKey);
         
         //console.log("ListCard handleBlur: " + textValue);
-        this.props.renameListItemCallback(key, textValue);
+        this.props.renameListItemCallback(this.state.listKey, idx, textValue);
         this.handleToggleEdit();
     }
 
@@ -39,7 +40,7 @@ export default class ListItem extends React.Component {
             return (
                 <input
                     id={"item-text-input-" + index}
-                    className='list-item'
+                    className='list-card'
                     type='text'
                     onKeyPress={this.handleKeyPress}
                     onBlur={this.handleBlur}

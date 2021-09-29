@@ -105,17 +105,18 @@ class App extends React.Component {
     }
 
 
-    renameListItem = (index, newName) => {
+    renameListItem = (key, index, newName) => {
         let currentList = this.state.currentList;
         currentList.items[index] = newName;
-        console.log(currentList.items);
-
+        
+        //console.log(key);
         this.setState(prevState => ({
-            currentList: prevState.currentList,
+            currentList: prevState.currentList
         }), () => {
             // AN AFTER EFFECT IS THAT WE NEED TO MAKE SURE
             // THE TRANSACTION STACK IS CLEARED
-            let list = this.db.queryGetList(index);
+            let list = this.db.queryGetList(key);
+            //console.log(list.name);
             list.items[index] = newName;
             this.db.mutationUpdateList(list);
             this.db.mutationUpdateSessionData(this.state.sessionData);
@@ -179,7 +180,7 @@ class App extends React.Component {
                 />
                 <Workspace
                     currentList={this.state.currentList}
-                    renameListItemCallback={this.renameListItem}     
+                    renameListItemCallback={this.renameListItem}
                 />
                 <Statusbar 
                     currentList={this.state.currentList} />

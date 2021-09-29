@@ -15,7 +15,7 @@ export default class Workspace extends React.Component {
 
         
         if (currentList != null) {
-
+            let listKey = currentList.key;
  
             return (
                 <div id="top5-workspace">
@@ -33,6 +33,7 @@ export default class Workspace extends React.Component {
                                 let idn = "item-" + index;
                                 return <ListItem
                                     id={idn}
+                                    lKey={listKey}
                                     renameListItemCallback={renameListItemCallback}
                                     index={index}
                                     item={item}
