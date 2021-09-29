@@ -103,6 +103,26 @@ class App extends React.Component {
             this.db.mutationUpdateSessionData(this.state.sessionData);
         });
     }
+
+
+    renameListItem = (index, newName) => {
+        let currentList = this.state.currentList;
+        currentList.items[index] = newName;
+        console.log(currentList.items);
+
+        this.setState(prevState => ({
+            currentList: prevState.currentList,
+        }), () => {
+            // AN AFTER EFFECT IS THAT WE NEED TO MAKE SURE
+            // THE TRANSACTION STACK IS CLEARED
+            let list = this.db.queryGetList(index);
+            list.items[index] = newName;
+            this.db.mutationUpdateList(list);
+            this.db.mutationUpdateSessionData(this.state.sessionData);
+        });
+    }
+
+
     // THIS FUNCTION BEGINS THE PROCESS OF LOADING A LIST FOR EDITING
     loadList = (key) => {
         let newCurrentList = this.db.queryGetList(key);
@@ -111,6 +131,7 @@ class App extends React.Component {
             sessionData: prevState.sessionData
         }), () => {
             // ANY AFTER EFFECTS?
+            //console.log(newCurrentList.name)
         });
     }
     // THIS FUNCTION BEGINS THE PROCESS OF CLOSING THE CURRENT LIST
@@ -157,7 +178,9 @@ class App extends React.Component {
                     renameListCallback={this.renameList}
                 />
                 <Workspace
-                    currentList={this.state.currentList} />
+                    currentList={this.state.currentList}
+                    renameListItemCallback={this.renameListItem}     
+                />
                 <Statusbar 
                     currentList={this.state.currentList} />
                 <DeleteModal
