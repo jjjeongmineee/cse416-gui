@@ -35,4 +35,14 @@ export default class DBManager {
         let sessionDataString = JSON.stringify(sessionData);
         localStorage.setItem("top5-data", sessionDataString);
     }
+
+    deleteList = (list) => {
+        localStorage.removeItem("top5-list-" + list.key);
+        let listData = this.queryGetSessionData();
+        listData.counter--;
+        //console.log(listData.counter);  
+        listData.keyNamePairs.splice(list.key, list.key+1);
+        //console.log(listData.keyNamePairs[0]);
+        this.mutationUpdateSessionData(listData);
+    }
 }

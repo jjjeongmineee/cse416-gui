@@ -33,6 +33,19 @@ export default class ListItem extends React.Component {
         this.handleToggleEdit();
     }
 
+    handleDrag = (event) => {
+        event.dataTransfer.setData("text", event.target.id);
+    }
+
+    handleDragOver = (event) => {
+        event.preventDefault();
+    }
+
+    handleDrop = (event) => {
+        event.preventDefault();
+        
+    }
+
     render() {
         const { idn, item, index } = this.props;
 
@@ -53,7 +66,12 @@ export default class ListItem extends React.Component {
                 <div
                     id={idn}
                     onDoubleClick={this.handleToggleEdit}
-                    className="top5-item">
+                    className="top5-item"
+                    draggable="true"
+                    onDragStart={this.handleDrag}
+                    onDragOver={this.handleDragOver}
+                    onDrop={this.handleDrop}
+                    >
                         {item}
                 </div>
             );

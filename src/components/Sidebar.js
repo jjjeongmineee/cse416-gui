@@ -9,7 +9,7 @@ export default class Sidebar extends React.Component {
                 createNewListCallback, 
                 deleteListCallback, 
                 loadListCallback,
-                renameListCallback} = this.props;
+                renameListCallback } = this.props;
         return (
             <div id="top5-sidebar">
                 <div id="sidebar-heading">
