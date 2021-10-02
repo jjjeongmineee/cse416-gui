@@ -4,11 +4,6 @@ import ListItem from "./ListItem";
 
 export default class Workspace extends React.Component {
 
-
-    handleToggleEdit(event) {
-        
-    }
-
     render() {
 
         const { currentList, renameListItemCallback } = this.props;

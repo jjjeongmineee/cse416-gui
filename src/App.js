@@ -24,7 +24,7 @@ class App extends React.Component {
         // SETUP THE INITIAL STATE
         this.state = {
             currentList : null,
-            sessionData : loadedSessionData
+            sessionData : loadedSessionData,
         }
     }
     sortKeyNamePairsByName = (keyNamePairs) => {
@@ -140,7 +140,7 @@ class App extends React.Component {
         this.setState(prevState => ({
             currentList: null,
             listKeyPairMarkedForDeletion : prevState.listKeyPairMarkedForDeletion,
-            sessionData: this.state.sessionData
+            sessionData: this.state.sessionData,
         }), () => {
             // ANY AFTER EFFECTS?
         });

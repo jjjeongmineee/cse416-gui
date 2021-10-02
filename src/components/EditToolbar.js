@@ -1,21 +1,13 @@
 import React from "react";
 
 export default class EditToolbar extends React.Component {
-    handleUndo = () => {
-
+    handleClose = (ev) => {
+        this.props.closeListCallback();
     }
-
-    handleRedo = () => {
-        
-    }
-
-    handleClose = () => {
-        
-    }
-
-    
     render() {
+
         return (
+            
             <div id="edit-toolbar">
                 <div 
                     id='undo-button' 
