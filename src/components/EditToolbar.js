@@ -62,7 +62,7 @@ export default class EditToolbar extends React.Component {
                     id='close-button'
                     className="top5-button"
                     onClick={this.handleClose}
-                    disabled>
+                    disabled={true}>
                         &#x24E7;
                 </div>
             </div>
