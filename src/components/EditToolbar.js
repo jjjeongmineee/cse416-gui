@@ -4,6 +4,15 @@ export default class EditToolbar extends React.Component {
     handleClose = (ev) => {
         this.props.closeListCallback();
     }
+
+    handleUndo = (ev) => {
+        this.props.undoCallback();
+    }
+
+    handleRedo = (ev) => {
+        this.props.redoCallback();
+    }
+
     render() {
 
         return (

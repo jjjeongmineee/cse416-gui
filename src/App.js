@@ -145,6 +145,15 @@ class App extends React.Component {
             // ANY AFTER EFFECTS?
         });
     }
+
+    undo = () => {
+
+    }
+
+    redo = () => {
+        
+    }
+
     deleteList = () => {
         // SOMEHOW YOU ARE GOING TO HAVE TO FIGURE OUT
         // WHICH LIST IT IS THAT THE USER WANTS TO
@@ -178,7 +187,9 @@ class App extends React.Component {
             <div id="app-root">
                 <Banner 
                     title='Top 5 Lister'
-                    closeCallback={this.closeCurrentList} />
+                    closeCallback={this.closeCurrentList}
+                    undoCallback={this.undo}
+                    redoCallback={this.redo} />
                 <Sidebar
                     heading='Your Lists'
                     currentList={this.state.currentList}
