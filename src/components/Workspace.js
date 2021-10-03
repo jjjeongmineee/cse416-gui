@@ -6,7 +6,7 @@ export default class Workspace extends React.Component {
 
     render() {
 
-        const { currentList, renameListItemCallback } = this.props;
+        const { currentList, renameListItemCallback, onDropCallback } = this.props;
 
         
         if (currentList != null) {
@@ -25,13 +25,12 @@ export default class Workspace extends React.Component {
                         <div id="edit-items">
                             
                             {currentList.items.map((item, index) => {
-                                let idn = "item-" + index;
                                 return <ListItem
-                                    id={idn}
                                     lKey={listKey}
                                     renameListItemCallback={renameListItemCallback}
                                     index={index}
                                     item={item}
+                                    onDropCallback={onDropCallback}
                                 />
 
                             })}

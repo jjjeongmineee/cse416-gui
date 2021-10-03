@@ -105,6 +105,20 @@ class App extends React.Component {
     }
 
 
+    onDrop = (newList, key) => {
+        let currentList = this.state.currentList;
+        currentList.items = newList;
+
+        this.setState(prevState => ({
+            currentList: prevState.currentList
+        }), () => {
+            let list = this.db.queryGetList(key);
+
+            list.items = newList;
+            this.db.mutationUpdateList(list);
+        });
+    }
+
     renameListItem = (key, index, newName) => {
         let currentList = this.state.currentList;
         currentList.items[index] = newName;
@@ -116,10 +130,8 @@ class App extends React.Component {
             // AN AFTER EFFECT IS THAT WE NEED TO MAKE SURE
             // THE TRANSACTION STACK IS CLEARED
             let list = this.db.queryGetList(key);
-            //console.log(list.name);
             list.items[index] = newName;
             this.db.mutationUpdateList(list);
-            this.db.mutationUpdateSessionData(this.state.sessionData);
         });
     }
 
@@ -203,6 +215,7 @@ class App extends React.Component {
                 <Workspace
                     currentList={this.state.currentList}
                     renameListItemCallback={this.renameListItem}
+                    onDropCallback={this.onDrop}
                 />
                 <Statusbar 
                     currentList={this.state.currentList} />

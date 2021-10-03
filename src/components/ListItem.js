@@ -1,24 +1,27 @@
 import React from "react";
 
 export default class ListItem extends React.Component {
+
+
     constructor(props) {
         super(props);
         this.state = {
             text: this.props.item,
             listKey: this.props.lKey,
             editActive: false,
+
         }
     }
-    handleToggleEdit = (event) => {
+    handleToggleEdit = (ev) => {
         this.setState({
             editActive: !this.state.editActive
         });
     }
-    handleUpdate = (event) => {
-        this.setState({ text: event.target.value });
+    handleUpdate = (ev) => {
+        this.setState({ text: ev.target.value });
     }
-    handleKeyPress = (event) => {
-        if (event.code === "Enter") {
+    handleKeyPress = (ev) => {
+        if (ev.code === "Enter") {
             this.handleBlur();
         }
     }
@@ -33,21 +36,50 @@ export default class ListItem extends React.Component {
         this.handleToggleEdit();
     }
 
-    handleDrag = (event) => {
-        event.dataTransfer.setData("text", event.target.id);
-    }
-
-    handleDragOver = (event) => {
-        event.preventDefault();
-    }
-
-    handleDrop = (event) => {
-        event.preventDefault();
+    handleDrag = (ev) => {
+        ev.dataTransfer.setData("text", ev.target.id);
         
     }
 
+    handleDragOver = (ev) => {
+        ev.preventDefault();
+    }
+
+    handleDrop = (ev) => {
+        ev.preventDefault();
+        let data = ev.dataTransfer.getData("text");
+        let originData = document.getElementById(data).innerHTML;
+        let tempVal = originData;
+        let list = ["", "", "", "", ""];
+        let sourceId = parseInt(data.slice(5, 6));
+        let id = parseInt(ev.target.id.slice(5, 6));
+        list[sourceId] = originData;
+        list[id] = ev.target.innerHTML;
+        for (let i = id; i <= 5; i++) {
+            console.log(i);
+            if (i === 5) {
+                i = -1;
+            }
+            else {
+                if (i === sourceId) {
+                    console.log("ye");
+                    let elemId = document.getElementById("item-" + i);
+                    elemId.innerHTML = tempVal;
+                    list[i] = tempVal;
+                    break;
+                }
+                let elemId = document.getElementById("item-" + i);
+                let secondTemp = elemId.innerHTML;
+                elemId.innerHTML = tempVal;
+                list[i] = tempVal;
+                tempVal = secondTemp;
+            }
+        }
+        this.props.onDropCallback(list, this.state.listKey);
+    }
+
     render() {
-        const { idn, item, index } = this.props;
+        const { item, index } = this.props;
 
         if (this.state.editActive) {
             return (
@@ -62,6 +94,7 @@ export default class ListItem extends React.Component {
                 />)
         }
         else {
+            let idn = "item-" + index
             return (
                 <div
                     id={idn}
