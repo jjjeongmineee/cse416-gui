@@ -11,7 +11,6 @@ export default class DeleteModal extends Component {
         if (currentList != null) {
             name = currentList.name;
         }
-        //name = "suck it";
         return (
             <div
                 className="modal"

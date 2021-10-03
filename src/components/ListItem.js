@@ -45,18 +45,27 @@ export default class ListItem extends React.Component {
         ev.preventDefault();
     }
 
+    handleDragEnter = (ev) => {
+        ev.target.style.backgroundColor = "green";
+    }
+
+    handleDragLeave = (ev) => {
+        ev.target.style.backgroundColor = "";
+    }
+
     handleDrop = (ev) => {
         ev.preventDefault();
+        ev.target.style.backgroundColor = "";
         let data = ev.dataTransfer.getData("text");
         let originData = document.getElementById(data).innerHTML;
         let tempVal = originData;
-        let list = ["", "", "", "", ""];
+        let list = ["", "", "", "", ""]
+        for (let i = 0; i < 5; i++) {
+            list[i] = document.getElementById("item-" + i).innerHTML;
+        }
         let sourceId = parseInt(data.slice(5, 6));
         let id = parseInt(ev.target.id.slice(5, 6));
-        list[sourceId] = originData;
-        list[id] = ev.target.innerHTML;
         for (let i = id; i <= 5; i++) {
-            console.log(i);
             if (i === 5) {
                 i = -1;
             }
@@ -104,6 +113,8 @@ export default class ListItem extends React.Component {
                     onDragStart={this.handleDrag}
                     onDragOver={this.handleDragOver}
                     onDrop={this.handleDrop}
+                    onDragEnter={this.handleDragEnter}
+                    onDragLeave={this.handleDragLeave}
                     >
                         {item}
                 </div>

@@ -115,6 +115,7 @@ class App extends React.Component {
             let list = this.db.queryGetList(key);
 
             list.items = newList;
+            console.log(list.items);
             this.db.mutationUpdateList(list);
         });
     }
