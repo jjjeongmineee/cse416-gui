@@ -25,6 +25,9 @@ class App extends React.Component {
         this.state = {
             currentList : null,
             sessionData : loadedSessionData,
+            transactions : [],
+            totalTransactions : 0,
+            recentTransactionIndex: -1
         }
     }
     sortKeyNamePairsByName = (keyNamePairs) => {
@@ -157,6 +160,14 @@ class App extends React.Component {
         }), () => {
             // ANY AFTER EFFECTS?
         });
+    }
+
+    hasTransactionToUndo = () => {
+        return (this.state.recentTransactionIndex+1) < this.state.totalTransactions
+    }
+
+    hasTransactionToRedo = () => {
+        return this.state.recentTransactionIndex >= 0;
     }
 
     undo = () => {
