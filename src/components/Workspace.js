@@ -11,6 +11,7 @@ export default class Workspace extends React.Component {
         
         if (currentList != null) {
             let listKey = currentList.key;
+            //console.log(listKey);
  
             return (
                 <div id="top5-workspace">

@@ -90,6 +90,8 @@ class App extends React.Component {
             currentList.name = newName;
         }
 
+        this.clearStack();
+
         this.setState(prevState => ({
             currentList: prevState.currentList,
             sessionData: {
@@ -112,6 +114,8 @@ class App extends React.Component {
         let currentList = this.state.currentList;
         currentList.items = newList;
 
+        this.addTransaction();
+
         this.setState(prevState => ({
             currentList: prevState.currentList
         }), () => {
@@ -123,11 +127,14 @@ class App extends React.Component {
         });
     }
 
-    renameListItem = (key, index, newName) => {
+    renameListItem = (index, newName) => {
         let currentList = this.state.currentList;
+        let key = currentList.key;
+        //console.log(currentList.key);
+        this.addTransaction(currentList);
+        //console.log(currentList.items);
         currentList.items[index] = newName;
-        
-        //console.log(key);
+        //console.log(currentList.items);
         this.setState(prevState => ({
             currentList: prevState.currentList
         }), () => {
@@ -163,7 +170,7 @@ class App extends React.Component {
     }
 
     hasTransactionToUndo = () => {
-        return (this.state.recentTransactionIndex+1) < this.state.totalTransactions
+        return (this.state.recentTransactionIndex + 1) < this.state.totalTransactions
     }
 
     hasTransactionToRedo = () => {
@@ -171,11 +178,36 @@ class App extends React.Component {
     }
 
     undo = () => {
-
+        if (this.hasTransactionToUndo()) {
+            console.log("undo");
+        }
     }
 
     redo = () => {
-        
+        if (this.hasTransactionToRedo()) {
+            console.log("redo");
+        }
+    }
+
+    addTransaction = (currentList) => {
+        let ts = this.state.transactions;
+        ts[0] = currentList.items;
+        ts[1] = currentList.items[0];
+        /*let tt = this.state.totalTransactions + 1;
+        this.setState(prevState => ({
+            transactions : ts,
+            totalTransactions : tt,
+            recentTransactionIndex : this.state.transactions.length - 1
+        }));*/
+        console.log(this.state.transactions);
+    }
+
+    clearStack = () => {
+        this.setState(prevState => ({
+            transactions : [],
+            totalTransactions : 0,
+            recentTransactionIndex : -1
+        }));
     }
 
     deleteList = () => {
@@ -185,8 +217,8 @@ class App extends React.Component {
         // NAME PROPERLY DISPLAYS INSIDE THE MODAL
         this.showDeleteListModal();
     }
-    confirmDelete = (key) => {
-        this.db.deleteList(key)
+    confirmDelete = (currentList) => {
+        this.db.deleteList(currentList)
         this.hideDeleteListModal();
         let sessionD = this.db.queryGetSessionData();
         this.setState(prevState => ({

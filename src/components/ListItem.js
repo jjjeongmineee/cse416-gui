@@ -29,10 +29,9 @@ export default class ListItem extends React.Component {
         let idx = this.props.index;
         //console.log(this.state.text);
         let textValue = this.state.text;
-        //console.log(this.state.listKey);
         
         //console.log("ListCard handleBlur: " + textValue);
-        this.props.renameListItemCallback(this.state.listKey, idx, textValue);
+        this.props.renameListItemCallback(idx, textValue);
         this.handleToggleEdit();
     }
 
