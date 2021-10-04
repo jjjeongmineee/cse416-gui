@@ -194,6 +194,8 @@ class App extends React.Component {
         let modal = document.getElementById("delete-modal");
         modal.classList.remove("is-visible");
     }
+
+
     render() {
         return (
             <div id="app-root">
@@ -224,6 +226,7 @@ class App extends React.Component {
                     deleteListCallback={this.confirmDelete}
                     currentList={this.state.currentList}
                 />
+                <input type="hidden" />
             </div>
         );
     }
