@@ -25,10 +25,11 @@ class App extends React.Component {
         this.state = {
             currentList : null,
             sessionData : loadedSessionData,
-            transactions : [],
-            totalTransactions : 0,
-            recentTransactionIndex: -1
         }
+
+        this.transactions = [];
+        this.totalTransactions = 0;
+        this.recentTransactionIndex = -1;
     }
     sortKeyNamePairsByName = (keyNamePairs) => {
         keyNamePairs.sort((keyPair1, keyPair2) => {
@@ -130,7 +131,7 @@ class App extends React.Component {
     renameListItem = (index, newName) => {
         let currentList = this.state.currentList;
         let key = currentList.key;
-        //console.log(currentList.key);
+        console.log(currentList + " " + newName);
         this.addTransaction(currentList);
         //console.log(currentList.items);
         currentList.items[index] = newName;
@@ -170,16 +171,30 @@ class App extends React.Component {
     }
 
     hasTransactionToUndo = () => {
-        return (this.state.recentTransactionIndex + 1) < this.state.totalTransactions
+        return (this.recentTransactionIndex + 1) <= this.totalTransactions;
     }
 
     hasTransactionToRedo = () => {
-        return this.state.recentTransactionIndex >= 0;
+        return this.recentTransactionIndex >= 0;
     }
 
     undo = () => {
         if (this.hasTransactionToUndo()) {
-            console.log("undo");
+            console.log(this.transactions);
+            let clist = this.state.currentList;
+            console.log(clist);
+            for (let i = 0; i < 5; i++) {
+                clist.items[i] = this.transactions[this.recentTransactionIndex][i];
+            } 
+            console.log(this.transactions[0]);
+            console.log(clist);
+            this.setState(prevState => ({
+                currentList : clist
+            }));
+            this.transactions.pop();
+            this.totalTransactions--;
+            this.recentTransactionIndex--;
+            //this.loadList(this.state.currentList.key);
         }
     }
 
@@ -190,16 +205,10 @@ class App extends React.Component {
     }
 
     addTransaction = (currentList) => {
-        let ts = this.state.transactions;
-        ts[0] = currentList.items;
-        ts[1] = currentList.items[0];
-        /*let tt = this.state.totalTransactions + 1;
-        this.setState(prevState => ({
-            transactions : ts,
-            totalTransactions : tt,
-            recentTransactionIndex : this.state.transactions.length - 1
-        }));*/
-        console.log(this.state.transactions);
+        this.transactions.push(currentList.items);
+        console.log(this.transactions);
+        this.totalTransactions++;
+        this.recentTransactionIndex = this.transactions.length - 1;
     }
 
     clearStack = () => {
