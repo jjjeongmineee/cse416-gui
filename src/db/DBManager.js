@@ -36,13 +36,11 @@ export default class DBManager {
         localStorage.setItem("top5-data", sessionDataString);
     }
 
-    deleteList = (list) => {
-        localStorage.removeItem("top5-list-" + list.key);
+    deleteList = (key) => {
+        localStorage.removeItem("top5-list-" + key.key);
         let listData = this.queryGetSessionData();
         listData.counter--;
-        //console.log(listData.counter);  
-        listData.keyNamePairs.splice(list.key, list.key+1);
-        //console.log(listData.keyNamePairs[0]);
+        listData.keyNamePairs.splice(key.key, 1);
         this.mutationUpdateSessionData(listData);
     }
 }

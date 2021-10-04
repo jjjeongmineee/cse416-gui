@@ -174,15 +174,14 @@ class App extends React.Component {
         // NAME PROPERLY DISPLAYS INSIDE THE MODAL
         this.showDeleteListModal();
     }
-    confirmDelete = (currentList) => {
-        //console.log(currentList.name);
-        this.db.deleteList(currentList)
+    confirmDelete = (key) => {
+        this.db.deleteList(key)
         this.hideDeleteListModal();
+        let sessionD = this.db.queryGetSessionData();
         this.setState(prevState => ({
             currentList: null,
-
-            //sessionData: this.state.sessionData
-        }));    
+            sessionData: sessionD
+        }));
     }
     // THIS FUNCTION SHOWS THE MODAL FOR PROMPTING THE USER
     // TO SEE IF THEY REALLY WANT TO DELETE THE LIST
