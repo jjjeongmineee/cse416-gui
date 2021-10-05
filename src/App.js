@@ -30,7 +30,11 @@ class App extends React.Component {
         this.transactions = [];
         this.totalTransactions = 0;
         this.recentTransactionIndex = -1;
-        this.undoTransactions = []
+        this.undoTransactions = [];
+        this.addNewListB = true;
+        this.undoB = false;
+        this.redoB = false;
+        this.closeB = false;
     }
     sortKeyNamePairsByName = (keyNamePairs) => {
         keyNamePairs.sort((keyPair1, keyPair2) => {
@@ -109,6 +113,7 @@ class App extends React.Component {
             this.db.mutationUpdateList(list);
             this.db.mutationUpdateSessionData(this.state.sessionData);
         });
+        this.addNewListB = false;
     }
 
 
@@ -131,9 +136,10 @@ class App extends React.Component {
 
     renameListItem = (index, newName) => {
         let currentList = this.state.currentList;
+        let items = currentList.items
         let key = currentList.key;
         //console.log(currentList + " " + newName);
-        this.addTransaction(currentList);
+        this.addTransaction(items);
         //console.log(currentList.items);
         currentList.items[index] = newName;
         //console.log(currentList.items);
@@ -159,6 +165,8 @@ class App extends React.Component {
             // ANY AFTER EFFECTS?
             //console.log(newCurrentList.name)
         });
+        this.addNewListB = false;
+        this.closeB = true;
     }
     // THIS FUNCTION BEGINS THE PROCESS OF CLOSING THE CURRENT LIST
     closeCurrentList = () => {
@@ -169,6 +177,8 @@ class App extends React.Component {
         }), () => {
             // ANY AFTER EFFECTS?
         });
+        this.addNewListB = true;
+        this.closeB=false;
     }
 
     hasTransactionToUndo = () => {
@@ -199,6 +209,10 @@ class App extends React.Component {
             this.totalTransactions--;
             this.recentTransactionIndex--;
             //this.loadList(this.state.currentList.key);
+            this.redoB = true;
+            if (this.recentTransactionIndex < 0) {
+                this.undoB = false;
+            }
         }
     }
 
@@ -217,16 +231,21 @@ class App extends React.Component {
             this.transactions.push(this.undoTransactions.pop());
             this.totalTransactions++;
             this.recentTransactionIndex++;
+            this.undoB = true;
+            if (this.undoTransactions.length < 1) {
+                this.redoB = false;
+            }
         }
     }
 
     addTransaction = (currentList) => {
-        console.log(currentList.items);  // gives the old value.. the one to be put on the transaction stack
-        this.transactions[this.totalTransactions] = currentList.items;
+        console.log(currentList);  // gives the old value.. the one to be put on the transaction stack
+        this.transactions[this.totalTransactions] = currentList;
          // for some reason.. it gives the new values even though I am pushing the old values
         this.totalTransactions++;
         this.recentTransactionIndex = this.transactions.length - 1;
         console.log(this.transactions[0][0]);
+        this.undoB = true;
     }
 
     clearStack = () => {
@@ -264,8 +283,20 @@ class App extends React.Component {
         modal.classList.remove("is-visible");
     }
 
+    undoRedoCall = (ev) => {
+        if (ev.ctrlKey) {
+            if (ev.key === 'y') {
+                this.redo();
+            }
+            else if (ev.key === 'z') {
+                this.undo();
+            }
+        }
+    }
+
 
     render() {
+        window.onkeydown = this.undoRedoCall;
         return (
             <div id="app-root">
                 <Banner 
@@ -273,7 +304,10 @@ class App extends React.Component {
                     currentList={this.state.currentList}
                     closeCallback={this.closeCurrentList}
                     undoCallback={this.undo}
-                    redoCallback={this.redo} />
+                    redoCallback={this.redo} 
+                    undoBC={this.undoB}
+                    redoBC={this.redoB}
+                    closeB={this.closeB} />
                 <Sidebar
                     heading='Your Lists'
                     currentList={this.state.currentList}
@@ -282,6 +316,7 @@ class App extends React.Component {
                     deleteListCallback={this.deleteList}
                     loadListCallback={this.loadList}
                     renameListCallback={this.renameList}
+                    newListB={this.addNewListB}
                 />
                 <Workspace
                     currentList={this.state.currentList}

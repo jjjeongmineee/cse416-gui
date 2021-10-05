@@ -3,7 +3,7 @@ import EditToolbar from "./EditToolbar";
 
 export default class Banner extends React.Component {
     render() {
-        const { title, currentList, closeCallback, undoCallback, redoCallback } = this.props;
+        const { title, closeCallback, undoCallback, redoCallback, undoBC, redoBC, closeB } = this.props;
         return (
             <div id="top5-banner">
                 {title}
@@ -11,7 +11,9 @@ export default class Banner extends React.Component {
                     closeCallback={closeCallback}
                     undoCallback={undoCallback}
                     redoCallback={redoCallback}
-                    currentList={currentList}
+                    undoBC={undoBC}
+                    redoBC={redoBC}
+                    closeB={closeB}
                 />
             </div>
         );
