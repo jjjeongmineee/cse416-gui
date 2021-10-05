@@ -30,6 +30,7 @@ class App extends React.Component {
         this.transactions = [];
         this.totalTransactions = 0;
         this.recentTransactionIndex = -1;
+        this.undoTransactions = []
     }
     sortKeyNamePairsByName = (keyNamePairs) => {
         keyNamePairs.sort((keyPair1, keyPair2) => {
@@ -131,7 +132,7 @@ class App extends React.Component {
     renameListItem = (index, newName) => {
         let currentList = this.state.currentList;
         let key = currentList.key;
-        console.log(currentList + " " + newName);
+        //console.log(currentList + " " + newName);
         this.addTransaction(currentList);
         //console.log(currentList.items);
         currentList.items[index] = newName;
@@ -179,19 +180,22 @@ class App extends React.Component {
     }
 
     undo = () => {
+        console.log(this.transactions[0][0]);
         if (this.hasTransactionToUndo()) {
-            console.log(this.transactions);
+            //console.log(this.transactions);
+            
             let clist = this.state.currentList;
-            console.log(clist);
+            //console.log(clist);
+            
             for (let i = 0; i < 5; i++) {
                 clist.items[i] = this.transactions[this.recentTransactionIndex][i];
             } 
-            console.log(this.transactions[0]);
-            console.log(clist);
+            //console.log(this.transactions[0]);
+            //console.log(clist);
             this.setState(prevState => ({
                 currentList : clist
             }));
-            this.transactions.pop();
+            this.undoTransactions.push(this.transactions.pop());
             this.totalTransactions--;
             this.recentTransactionIndex--;
             //this.loadList(this.state.currentList.key);
@@ -200,23 +204,36 @@ class App extends React.Component {
 
     redo = () => {
         if (this.hasTransactionToRedo()) {
-            console.log("redo");
+            let clist = this.state.currentList;
+            //console.log(clist);
+            for (let i = 0; i < 5; i++) {
+                clist.items[i] = this.undoTransactions[this.undoTransactions.length - 1][i];
+            } 
+            //console.log(this.transactions[0]);
+            //console.log(clist);
+            this.setState(prevState => ({
+                currentList : clist
+            }));
+            this.transactions.push(this.undoTransactions.pop());
+            this.totalTransactions++;
+            this.recentTransactionIndex++;
         }
     }
 
     addTransaction = (currentList) => {
-        this.transactions.push(currentList.items);
-        console.log(this.transactions);
+        console.log(currentList.items);  // gives the old value.. the one to be put on the transaction stack
+        this.transactions[this.totalTransactions] = currentList.items;
+         // for some reason.. it gives the new values even though I am pushing the old values
         this.totalTransactions++;
         this.recentTransactionIndex = this.transactions.length - 1;
+        console.log(this.transactions[0][0]);
     }
 
     clearStack = () => {
-        this.setState(prevState => ({
-            transactions : [],
-            totalTransactions : 0,
-            recentTransactionIndex : -1
-        }));
+        this.transactions = [];
+        this.totalTransactions = 0;
+        this.recentTransactionIndex = -1;
+        this.undoTransactions = [];
     }
 
     deleteList = () => {
