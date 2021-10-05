@@ -3,16 +3,24 @@ import React from "react";
 export default class EditToolbar extends React.Component {
 
     handleClose = (ev) => {
-        this.props.closeCallback();
+        if (this.props.closeB) {
+            this.props.closeCallback();
+        }
     }
 
     handleUndo = (ev) => {
-        this.props.undoCallback();
+        if (this.props.undoBC) {
+            this.props.undoCallback();
+        }
     }
 
     handleRedo = (ev) => {
-        this.props.redoCallback();
+        if (this.props.redoBC) {
+            this.props.redoCallback();
+        }
     }
+
+
 
     render() {
         const { undoBC, redoBC, closeB } = this.props;
@@ -21,23 +29,20 @@ export default class EditToolbar extends React.Component {
             <div id="edit-toolbar">
                 <div 
                     id='undo-button' 
-                    className="top5-button"
-                    onClick={this.handleUndo}
-                    disabled={!undoBC}>
+                    className={!undoBC ? "top5-button-disabled" : "top5-button"}
+                    onClick={this.handleUndo}>
                         &#x21B6;
                 </div>
                 <div
                     id='redo-button'
-                    className="top5-button"
-                    onClick={this.handleRedo}
-                    disabled={!redoBC} >
+                    className={!redoBC ? "top5-button-disabled" : "top5-button"}
+                    onClick={this.handleRedo} >
                         &#x21B7;
                 </div>
                 <div
                     id='close-button'
-                    className="top5-button"
-                    onClick={this.handleClose}
-                    disabled={!closeB} >
+                    className={!closeB ? "top5-button-disabled" : "top5-button"}
+                    onClick={this.handleClose} >
                         &#x24E7;
                 </div>
             </div>

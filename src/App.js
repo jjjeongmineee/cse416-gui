@@ -25,6 +25,9 @@ class App extends React.Component {
         this.state = {
             currentList : null,
             sessionData : loadedSessionData,
+            undoB : false,
+            redoB : false,
+            closeB: false
         }
 
         this.transactions = [];
@@ -32,9 +35,7 @@ class App extends React.Component {
         this.recentTransactionIndex = -1;
         this.undoTransactions = [];
         this.addNewListB = true;
-        this.undoB = false;
-        this.redoB = false;
-        this.closeB = false;
+
     }
     sortKeyNamePairsByName = (keyNamePairs) => {
         keyNamePairs.sort((keyPair1, keyPair2) => {
@@ -160,13 +161,13 @@ class App extends React.Component {
         let newCurrentList = this.db.queryGetList(key);
         this.setState(prevState => ({
             currentList: newCurrentList,
-            sessionData: prevState.sessionData
+            sessionData: prevState.sessionData,
+            closeB: true
         }), () => {
             // ANY AFTER EFFECTS?
             //console.log(newCurrentList.name)
         });
         this.addNewListB = false;
-        this.closeB = true;
     }
     // THIS FUNCTION BEGINS THE PROCESS OF CLOSING THE CURRENT LIST
     closeCurrentList = () => {
@@ -174,11 +175,11 @@ class App extends React.Component {
             currentList: null,
             listKeyPairMarkedForDeletion : prevState.listKeyPairMarkedForDeletion,
             sessionData: this.state.sessionData,
+            closeB: false
         }), () => {
             // ANY AFTER EFFECTS?
         });
         this.addNewListB = true;
-        this.closeB=false;
     }
 
     hasTransactionToUndo = () => {
@@ -190,7 +191,7 @@ class App extends React.Component {
     }
 
     undo = () => {
-        console.log(this.transactions[0][0]);
+        //console.log(this.transactions[0][0]);
         if (this.hasTransactionToUndo()) {
             //console.log(this.transactions);
             
@@ -203,15 +204,17 @@ class App extends React.Component {
             //console.log(this.transactions[0]);
             //console.log(clist);
             this.setState(prevState => ({
-                currentList : clist
+                currentList : clist,
+                redoB : true
             }));
             this.undoTransactions.push(this.transactions.pop());
             this.totalTransactions--;
             this.recentTransactionIndex--;
             //this.loadList(this.state.currentList.key);
-            this.redoB = true;
             if (this.recentTransactionIndex < 0) {
-                this.undoB = false;
+                this.setState(prevState => ({
+                    undoB : false
+                }))
             }
         }
     }
@@ -226,14 +229,16 @@ class App extends React.Component {
             //console.log(this.transactions[0]);
             //console.log(clist);
             this.setState(prevState => ({
-                currentList : clist
+                currentList : clist,
+                undoB : true
             }));
             this.transactions.push(this.undoTransactions.pop());
             this.totalTransactions++;
             this.recentTransactionIndex++;
-            this.undoB = true;
             if (this.undoTransactions.length < 1) {
-                this.redoB = false;
+                this.setState(prevState => ({
+                    redoB : false
+                }))
             }
         }
     }
@@ -245,7 +250,9 @@ class App extends React.Component {
         this.totalTransactions++;
         this.recentTransactionIndex = this.transactions.length - 1;
         console.log(this.transactions[0][0]);
-        this.undoB = true;
+        this.setState(prevState => ({
+            undoB : true
+        }))
     }
 
     clearStack = () => {
@@ -305,9 +312,9 @@ class App extends React.Component {
                     closeCallback={this.closeCurrentList}
                     undoCallback={this.undo}
                     redoCallback={this.redo} 
-                    undoBC={this.undoB}
-                    redoBC={this.redoB}
-                    closeB={this.closeB} />
+                    undoBC={this.state.undoB}
+                    redoBC={this.state.redoB}
+                    closeB={this.state.closeB} />
                 <Sidebar
                     heading='Your Lists'
                     currentList={this.state.currentList}
