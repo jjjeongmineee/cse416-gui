@@ -10,9 +10,9 @@ import Banner from './components/Banner.js';
 import Sidebar from './components/Sidebar.js';
 import Workspace from './components/Workspace.js';
 import Statusbar from './components/Statusbar.js';
-import ChangeItem_Transaction from './components/ChangeItem_Transaction';
-import MoveItem_Transaction from './components/MoveItem_Transaction';
-import jsTPS from './components/jsTPS'
+import ChangeItem_Transaction from './components/ChangeItem_Transaction.js';
+import MoveItem_Transaction from './components/MoveItem_Transaction.js';
+import jsTPS_Transaction from './components/jsTPS.js'
 
 class App extends React.Component {
     constructor(props) {
@@ -30,15 +30,11 @@ class App extends React.Component {
             sessionData : loadedSessionData,
             undoB : false,
             redoB : false,
-            closeB: false
+            closeB: false,
+            addNewListB: true
         }
-
-        this.transactions = [];
-        this.totalTransactions = 0;
-        this.recentTransactionIndex = -1;
-        this.undoTransactions = [];
-        this.addNewListB = true;
-
+        
+        this.tps = new jsTPS_Transaction();
     }
     sortKeyNamePairsByName = (keyNamePairs) => {
         keyNamePairs.sort((keyPair1, keyPair2) => {
@@ -107,7 +103,8 @@ class App extends React.Component {
             sessionData: {
                 nextKey: prevState.sessionData.nextKey,
                 counter: prevState.sessionData.counter,
-                keyNamePairs: newKeyNamePairs
+                keyNamePairs: newKeyNamePairs,
+                addNewListB:  false
             }
         }), () => {
             // AN AFTER EFFECT IS THAT WE NEED TO MAKE SURE
@@ -117,16 +114,13 @@ class App extends React.Component {
             this.db.mutationUpdateList(list);
             this.db.mutationUpdateSessionData(this.state.sessionData);
         });
-        this.addNewListB = false;
     }
 
 
     onDrop = (newList, key) => {
         let currentList = this.state.currentList;
-        this.addTransaction(currentList.items);
+        this.addMoveTransaction(currentList.items, newList);
         currentList.items = newList;
-
-        this.addTransaction();
 
         this.setState(prevState => ({
             currentList: prevState.currentList
@@ -134,20 +128,15 @@ class App extends React.Component {
             let list = this.db.queryGetList(key);
 
             list.items = newList;
-            console.log(list.items);
             this.db.mutationUpdateList(list);
         });
     }
 
     renameListItem = (index, newName) => {
         let currentList = this.state.currentList;
-        let items = currentList.items
         let key = currentList.key;
-        //console.log(currentList + " " + newName);
-        this.addTransaction(items);
-        //console.log(currentList.items);
+        this.addChangeTransaction(index, currentList.items[index], newName);
         currentList.items[index] = newName;
-        //console.log(currentList.items);
         this.setState(prevState => ({
             currentList: prevState.currentList
         }), () => {
@@ -166,13 +155,13 @@ class App extends React.Component {
         this.setState(prevState => ({
             currentList: newCurrentList,
             sessionData: prevState.sessionData,
-            closeB: true
+            closeB: true,
+            addNewListB:false
         }), () => {
             // ANY AFTER EFFECTS?
             //console.log(newCurrentList.name)
         });
         this.clearStack();
-        this.addNewListB = false;
     }
     // THIS FUNCTION BEGINS THE PROCESS OF CLOSING THE CURRENT LIST
     closeCurrentList = () => {
@@ -180,97 +169,67 @@ class App extends React.Component {
             currentList: null,
             listKeyPairMarkedForDeletion : prevState.listKeyPairMarkedForDeletion,
             sessionData: this.state.sessionData,
-            closeB: false
+            closeB: false,
+            addNewListB:true
         }), () => {
             // ANY AFTER EFFECTS?
         });
         this.clearStack();
-        this.addNewListB = true;
-    }
-
-    hasTransactionToUndo = () => {
-        return (this.recentTransactionIndex + 1) <= this.totalTransactions;
-    }
-
-    hasTransactionToRedo = () => {
-        return this.recentTransactionIndex >= 0;
     }
 
     undo = () => {
-        //console.log(this.transactions[0][0]);
-        if (this.hasTransactionToUndo()) {
-            //console.log(this.transactions);
-            
-            let clist = this.state.currentList;
-            //console.log(clist);
-            
-            for (let i = 0; i < 5; i++) {
-                clist.items[i] = this.transactions[this.recentTransactionIndex][i];
-            } 
-            //console.log(this.transactions[0]);
-            //console.log(clist);
+        if (!this.tps.hasTransactionToUndo()) {
+            return;
+        }
+        this.tps.undoTransaction();
+        this.setState(prevState => ({
+            redoB : true
+        }));
+        if (!this.tps.hasTransactionToUndo()) {
             this.setState(prevState => ({
-                currentList : clist,
-                redoB : true
+                undoB : false
             }));
-            this.undoTransactions.push(this.transactions.pop());
-            this.totalTransactions--;
-            this.recentTransactionIndex--;
-            //this.loadList(this.state.currentList.key);
-            if (this.recentTransactionIndex < 0) {
-                this.setState(prevState => ({
-                    undoB : false
-                }))
-            }
         }
     }
 
     redo = () => {
-        if (this.hasTransactionToRedo()) {
-            let clist = this.state.currentList;
-            //console.log(clist);
-            for (let i = 0; i < 5; i++) {
-                clist.items[i] = this.undoTransactions[this.undoTransactions.length - 1][i];
-            } 
-            //console.log(this.transactions[0]);
-            //console.log(clist);
+        if (!this.tps.hasTransactionToRedo()) {
+            return;
+        }
+        this.tps.doTransaction();
+        this.setState(prevState => ({
+            undoB : true
+        }));
+        if (!this.tps.hasTransactionToRedo()) {
             this.setState(prevState => ({
-                currentList : clist,
-                undoB : true
+                redoB : false
             }));
-            this.transactions.push(this.undoTransactions.pop());
-            this.totalTransactions++;
-            this.recentTransactionIndex++;
-            if (this.undoTransactions.length < 1) {
-                this.setState(prevState => ({
-                    redoB : false
-                }))
-            }
         }
     }
 
-    addTransaction = (currentList) => {
-        console.log(currentList);  // gives the old value.. the one to be put on the transaction stack
-        this.transactions[this.totalTransactions] = currentList;
-         // for some reason.. it gives the new values even though I am pushing the old values
-        this.totalTransactions++;
-        this.recentTransactionIndex = this.transactions.length - 1;
-        console.log(this.transactions[0][0]);
+    addChangeTransaction = (id, oldText, newText) => {
+        let transaction = new ChangeItem_Transaction(this.state.currentList.items, id, oldText, newText);
+        this.tps.addTransaction(transaction);
         this.setState(prevState => ({
             undoB : true
-        }))
+        }));
+    }
+
+    addMoveTransaction = (oldList, newList) => {
+        let transaction = new MoveItem_Transaction(this.state.currentList.items, oldList, newList);
+        this.tps.addTransaction(transaction);
+        this.setState(prevState => ({
+            undoB : true
+        }));
     }
 
     clearStack = () => {
-        this.transactions = [];
-        this.totalTransactions = 0;
-        this.recentTransactionIndex = -1;
-        this.undoTransactions = [];
         this.setState(prevState => ({
             undoB : false,
             redoB : false
         }));
-    }
+        this.tps.clearAllTransactions();
+;    }
 
     deleteList = () => {
         // SOMEHOW YOU ARE GOING TO HAVE TO FIGURE OUT
@@ -333,7 +292,7 @@ class App extends React.Component {
                     deleteListCallback={this.deleteList}
                     loadListCallback={this.loadList}
                     renameListCallback={this.renameList}
-                    newListB={this.addNewListB}
+                    newListB={this.state.addNewListB}
                 />
                 <Workspace
                     currentList={this.state.currentList}

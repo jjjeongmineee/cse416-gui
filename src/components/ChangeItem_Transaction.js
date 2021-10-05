@@ -19,11 +19,11 @@ export default class ChangeItem_Transaction extends jsTPS_Transaction {
     }
 
     doTransaction() {
-        this.model.changeItem(this.id, this.newText);
+        this.model[this.id] = this.newText;
     }
     
     undoTransaction() {
-        this.model.changeItem(this.id, this.oldText);
+        this.model[this.id] = this.oldText;
     }
 
 }
