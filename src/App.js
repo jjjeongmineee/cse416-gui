@@ -6,10 +6,13 @@ import DBManager from './db/DBManager';
 
 // THESE ARE OUR REACT COMPONENTS
 import DeleteModal from './components/DeleteModal';
-import Banner from './components/Banner.js'
-import Sidebar from './components/Sidebar.js'
+import Banner from './components/Banner.js';
+import Sidebar from './components/Sidebar.js';
 import Workspace from './components/Workspace.js';
-import Statusbar from './components/Statusbar.js'
+import Statusbar from './components/Statusbar.js';
+import ChangeItem_Transaction from './components/ChangeItem_Transaction';
+import MoveItem_Transaction from './components/MoveItem_Transaction';
+import jsTPS from './components/jsTPS'
 
 class App extends React.Component {
     constructor(props) {
@@ -120,6 +123,7 @@ class App extends React.Component {
 
     onDrop = (newList, key) => {
         let currentList = this.state.currentList;
+        this.addTransaction(currentList.items);
         currentList.items = newList;
 
         this.addTransaction();
@@ -262,7 +266,10 @@ class App extends React.Component {
         this.totalTransactions = 0;
         this.recentTransactionIndex = -1;
         this.undoTransactions = [];
-
+        this.setState(prevState => ({
+            undoB : false,
+            redoB : false
+        }));
     }
 
     deleteList = () => {
