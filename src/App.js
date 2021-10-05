@@ -167,6 +167,7 @@ class App extends React.Component {
             // ANY AFTER EFFECTS?
             //console.log(newCurrentList.name)
         });
+        this.clearStack();
         this.addNewListB = false;
     }
     // THIS FUNCTION BEGINS THE PROCESS OF CLOSING THE CURRENT LIST
@@ -179,6 +180,7 @@ class App extends React.Component {
         }), () => {
             // ANY AFTER EFFECTS?
         });
+        this.clearStack();
         this.addNewListB = true;
     }
 
@@ -260,6 +262,7 @@ class App extends React.Component {
         this.totalTransactions = 0;
         this.recentTransactionIndex = -1;
         this.undoTransactions = [];
+
     }
 
     deleteList = () => {
