@@ -22,3 +22,4 @@ Following the completion of GOAL 2, clicking on a county will zoom into the prec
 Clicking on a precinct leads into a different page with data about that precinct.
 
 ### Goal 5
+Clicking on each states will lead to page showing data relevant to redistricting.
