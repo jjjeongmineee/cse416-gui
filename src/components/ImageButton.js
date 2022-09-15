@@ -1,12 +1,14 @@
 import React from 'react';
 
-export default class PictureButton extends React.Component {
+export default class ImageButton extends React.Component {
 	render(){
-		const path = this.props.path;
+		const src = this.props.src;
 		const text = this.props.text;
 		return (
 			<div className='thirdSquare'>
-				<img src={path} alt={text}/>
+				<div className='imgWrapper'>
+					<img src={src} alt={text}/>
+				</div>
 				<div className='imgBtnText'>{text}</div>
 			</div>
 		);

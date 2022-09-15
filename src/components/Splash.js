@@ -1,17 +1,16 @@
 import React from 'react';
-import PictureButton from './PictureButton.js';
+import ImageButton from './ImageButton.js';
+import louisiana from './images/louisiana.jpg';
+import nevada from './images/nevada.jpg';
+import mississippi from './images/mississippi.jpg';
 
 export default class Splash extends React.Component {
-	constructor(props){
-		super(props);
-	}
-
 	render(){
 		return (
 			<div className='splashRoot'>
-				<PictureButton text='Louisiana' path={require('./images/louisiana.jpg')}/>
-				<PictureButton text='Nevada' path={require('./images/nevada.jpg')}/>
-				<PictureButton text='Mississippi' path={require('./images/mississippi.jpg')}/>
+				<ImageButton text='Louisiana' src={louisiana}/>
+				<ImageButton text='Nevada' src={nevada}/>
+				<ImageButton text='Mississippi' src={mississippi}/>
 			</div>
 		)
 	}

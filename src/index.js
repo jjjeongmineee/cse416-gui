@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Splash from './components/Splash.js';
+import './index.css';
 //import reportWebVitals from './reportWebVitals';
 
 // THIS FUNCTION TESTS TO SEE IF THIS APP HAS
