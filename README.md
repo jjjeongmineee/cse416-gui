@@ -2,8 +2,6 @@
 
 ### Run this program using `npm start`
 
-
-
 For this GUI, we will be using Figma as a goal to make a dynamic front-end for our information display.
 
 ## GOAL 1
