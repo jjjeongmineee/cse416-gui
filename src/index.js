@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Splash from './components/Splash.js';
 import './index.css';
-//import reportWebVitals from './reportWebVitals';
+import reportWebVitals from './reportWebVitals';
 
 // THIS FUNCTION TESTS TO SEE IF THIS APP HAS
 // DATA IN LOCAL STORAGE. IF IT DOES, TRUE IS
@@ -55,15 +55,15 @@ function launch() {
 	);
 }
 
-//if (!isInLocalStorage()) {
-//	loadListsFromJSON("./data/default_lists.json");
-//}
-//else {
+if (!isInLocalStorage()) {
+	loadListsFromJSON("./data/default_lists.json");
+}
+else {
 	launch();
-//}
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-//reportWebVitals();
+reportWebVitals();
 
