@@ -1,0 +1,75 @@
+:root {
+  /* 
+        FIRST WE'LL DEFINE OUR SWATCHES, i.e. THE COMPLEMENTARY
+        COLORS THAT WE'LL USE TOGETHER IN MULTIPLE PLACES THAT
+        TOGETHER WILL MAKE UP A GIVEN THEME
+    */
+  --swatch-foundation: #eeeedd; 
+  --swatch-primary: #e6e6e6; 
+  --swatch-complement: #e1e4cb;
+  --swatch-contrast: #111111; 
+  --swatch-accent: #669966; 
+  --swatch-status: #123456;
+  --my-font-family: "Robaaaoto";
+  --bounceEasing: cubic-bezier(0.51, 0.92, 0.24, 1.15);
+}
+
+html, body {
+	background-color: var(--swatch-foundation);
+	height: 100vh;
+	width: 100%;
+	margin: 0px;
+}
+
+#root {
+	width: 100%;
+	height: 100%;
+}
+
+.splashRoot {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+}
+
+.thirdSquare {
+	width: 33%;
+	aspect-ratio: 1/1;
+	padding: 50px;
+	position: relative;
+	display: inline-block;
+}
+
+.imgWrapper {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.imgWrapper img {
+	filter: brightness(65%) blur(2px);
+	transition: all 0.2s ease;
+	transform: scale(1.01);
+	width: 100%;
+	height: 100%;
+	object-fit: cover;	
+	object-position: 50% 50%;
+}
+
+.thirdSquare img:hover {
+	filter: brightness(75%);
+	transform: scale(1.1);
+	transition: all 0.2s ease;
+}
+
+.imgBtnText {
+	color: white;
+	font-size: 20pt;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-weight: bold;
+}
