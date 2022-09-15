@@ -15,7 +15,34 @@
 }
 
 body {
-  background-color: var(--swatch-foundation);
+	background-color: var(--swatch-foundation);
+	height: 100%;
+	width: 100%;
+}
+
+div:.splashRoot {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 100%;		
+}
+
+div:.thirdSquare {
+	width: 33%;
+	aspect-ratio: 1/1;
+	padding: 50px;
+	position: relative;
+	display: inline-block;
+}
+
+div:.imgBtnText {
+	color: white;
+	font-size: 20pt;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 #root {
