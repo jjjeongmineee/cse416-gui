@@ -20,3 +20,5 @@ Following the completion of GOAL 2, clicking on a county will zoom into the prec
 
 ### Goal 4
 Clicking on a precinct leads into a different page with data about that precinct.
+
+### Goal 5
