@@ -2,7 +2,8 @@
 
 ### Run this program using `npm start`
 
-
+### Figma
+See the figma here: https://www.figma.com/file/mtzYQA6ditkqzaFOftHSSa/Home-Page-Design?node-id=0%3A1
 
 For this GUI, we will be using Figma as a goal to make a dynamic front-end for our information display.
 
