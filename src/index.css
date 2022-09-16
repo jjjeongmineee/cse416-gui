@@ -28,10 +28,21 @@ html, body {
 
 .splashRoot {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	height: 100%;
 	width: 100%;
+}
+
+.images {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.searchWrapper {
 }
 
 .thirdSquare {
