@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Splash from './components/Splash.js';
+import StatePage from './components/StatePage.js';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
@@ -48,9 +50,12 @@ function launch() {
 	// IF NO DATA IS IN LOCAL STORAGE THEN LOAD ALL THE TEST
 	// DATA FROM THE JSON FILE AND PUT IT THERE
 	ReactDOM.render(
-		<React.StrictMode>
-			<Splash/>
-		</React.StrictMode>,
+		<BrowserRouter>
+			<Routes>
+				<Route path="/" element={<Splash/>}/>
+				<Route path="/louisiana" element={<StatePage stateName='Louisiana'/>}/>
+			</Routes>
+		</BrowserRouter>,
 		document.getElementById('root')
 	);
 }

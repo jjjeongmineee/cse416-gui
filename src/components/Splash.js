@@ -1,3 +1,8 @@
+/**
+ * The splash screen for the app.
+ * Displays a list of tiles of images of a state and the state name that are clickable, and a search bar that filters them.
+ */
+
 import React from 'react';
 
 import TextField from '@mui/material/TextField';
@@ -38,7 +43,7 @@ export default class Splash extends React.Component {
 				</Box>
 				<div className='images'>
 					{effStateList.map(e => (
-						<ImageButton text={e.text} src={e.src} key={e.text}/>
+						<ImageButton text={e.text} src={e.src} route={'/' + e.text.toLowerCase()}key={e.text}/>
 					))}
 				</div>
 			</div>

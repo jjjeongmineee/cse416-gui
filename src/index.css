@@ -42,9 +42,6 @@ html, body {
 	width: 100%;
 }
 
-.searchWrapper {
-}
-
 .thirdSquare {
 	width: 33%;
 	aspect-ratio: 1/1;
@@ -83,4 +80,15 @@ html, body {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	font-weight: bold;
+}
+
+.leaflet-container {
+	width: 100%;
+	height: 100%;
+}
+
+.mapHolder {
+	width: 500px;
+	height: 500px;
+	aspect-ratio: 1/1;
 }
