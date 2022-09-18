@@ -8,7 +8,7 @@ var Data;
 export default Data = {
 	'Louisiana': {
 		center: [30.58, -92.32],
-		zoom: 6,
+		zoom: 7,
 		stateBounds: louisianaStateBounds
 	}
 }

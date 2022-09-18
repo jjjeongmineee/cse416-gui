@@ -87,8 +87,35 @@ html, body {
 	height: 100%;
 }
 
+.stateRoot {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+}
+
 .mapHolder {
-	width: 500px;
-	height: 500px;
-	aspect-ratio: 1/1;
+	width: 50%;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.full {
+	width: 100%;
+	height: 100%
+}
+
+.dataHolder {
+	width: 50%;
+	height: 100vh;
+}
+
+.dataChild {
+	padding: 50px;
+}
+
+.mapTab {
+	flex-grow: 10;
 }
