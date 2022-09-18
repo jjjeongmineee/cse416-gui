@@ -16,7 +16,7 @@ export default class MapTab extends React.Component {
 		const stateName = this.props.stateName;
 		return (
 			<div role="tabpanel" hidden={selectedTab !== tabIndex} id={`mapTab${tabIndex}`} aria-labelledby={`mapTab${tabIndex}`} className='mapTab'>
-				{selectedTab == tabIndex && (
+				{selectedTab === tabIndex && (
 					<Box sx={{width: '100%', height: '100%'}}>
 						<MapContainer center={Data[stateName].center} zoom={Data[stateName].zoom} scrollWheelZoom={true}>
 							<TileLayer
