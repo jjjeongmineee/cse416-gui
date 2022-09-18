@@ -91,31 +91,18 @@ html, body {
 	width: 100%;
 	height: 100%;
 	display: flex;
-	justify-content: center;
+	justify-content: space-around;
+	align-items: center;
 	flex-direction: row;
 }
 
-.mapHolder {
-	width: 50%;
-	height: 100vh;
+.halfHolder {
+	width: 48%;
+	height: 96vh;
 	display: flex;
 	flex-direction: column;
 }
 
-.full {
-	width: 100%;
-	height: 100%
-}
-
-.dataHolder {
-	width: 50%;
-	height: 100vh;
-}
-
-.dataChild {
-	padding: 50px;
-}
-
 .mapTab {
-	flex-grow: 10;
+	flex-grow: 1;
 }
