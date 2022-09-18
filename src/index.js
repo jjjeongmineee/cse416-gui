@@ -54,6 +54,8 @@ function launch() {
 			<Routes>
 				<Route path="/" element={<Splash/>}/>
 				<Route path="/louisiana" element={<StatePage stateName='Louisiana'/>}/>
+				<Route path="/nevada" element={<StatePage stateName='Nevada'/>}/>
+				<Route path="/mississippi" element={<StatePage stateName='Mississippi'/>}/>
 			</Routes>
 		</BrowserRouter>,
 		document.getElementById('root')
