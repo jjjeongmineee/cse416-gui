@@ -24,6 +24,7 @@ export default class MapTab extends React.Component {
 								url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 							/>
 							<Bounds file={Data[stateName].stateBounds}/>
+							<Bounds file={Data[stateName].districtBounds}/>
 						</MapContainer>
 					</Box>)}
 			</div>

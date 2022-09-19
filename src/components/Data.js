@@ -3,7 +3,11 @@
  */
 
 import louisianaStateBounds from './geojson/louisianaStateBounds.json';
+
 import nevadaStateBounds from './geojson/nevadaStateBounds.json';
+import nevadaCountyBounds from './geojson/nevadaCountyBounds.json';
+import nevadaDistrictBounds from './geojson/nevadaDistrictBounds.json'
+
 import mississippiStateBounds from './geojson/mississippiStateBounds.json';
 
 var Data;
@@ -14,12 +18,14 @@ export default Data = {
 		stateBounds: louisianaStateBounds
 	},
 	'Nevada': {
-		center: [38.6, -116.9],
+		center: [38.629, -116.631],
 		zoom: 7,
-		stateBounds: nevadaStateBounds
+		stateBounds: nevadaStateBounds,
+		districtBounds: nevadaDistrictBounds,
+		countyBounds: nevadaCountyBounds
 	},
 	'Mississippi': {
-
+		center: [32.697, -89.655],
 		zoom: 7,
 		stateBounds: mississippiStateBounds
 	}
