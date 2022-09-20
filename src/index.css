@@ -10,11 +10,11 @@
         COLORS THAT WE'LL USE TOGETHER IN MULTIPLE PLACES THAT
         TOGETHER WILL MAKE UP A GIVEN THEME
     */
-  --swatch-foundation: #eeeedd; 
+  --swatch-foundation: #efefef; 
   --swatch-primary: #e6e6e6; 
   --swatch-complement: #e1e4cb;
   --swatch-contrast: #111111; 
-  --swatch-accent: #669966; 
+  --swatch-accent: #42a5f5; 
   --swatch-status: #123456;
   --my-font-family: "Robaaaoto";
   --bounceEasing: cubic-bezier(0.51, 0.92, 0.24, 1.15);
@@ -162,4 +162,24 @@ html, body {
 	flex-direction: row;
 	flex-grow: 0;
 	padding-top: 8px;
+}
+
+.graph {
+	flex: 1 1 0;
+}
+
+.graphImg {
+	height: 100%
+}
+
+.pValHolder {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+.paddedProgress {
+	padding: 8px;
+	height: 15vh;
+	width: 15vh;
 }
