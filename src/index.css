@@ -1,3 +1,9 @@
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
 :root {
   /* 
         FIRST WE'LL DEFINE OUR SWATCHES, i.e. THE COMPLEMENTARY
@@ -89,7 +95,29 @@ html, body {
 
 .stateRoot {
 	width: 100%;
-	height: 100%;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.stateBanner {
+	width: 100%;
+	flex-grow: 0;
+	background: var(--swatch-accent);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 8px;
+}
+
+.stateLabel {
+	font-size: 18pt;
+	padding: 0px 16px;
+}
+
+.stateContent {
+	width: 100%;
+	flex: 1 1 auto;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
@@ -97,12 +125,41 @@ html, body {
 }
 
 .halfHolder {
-	width: 48%;
-	height: 96vh;
+	width: 50%;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
+	padding: 8px;
 }
 
 .tabPanel {
 	flex-grow: 1;
+}
+
+.mapSubpane {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.analysisSubpane {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	padding: 8px;
+}
+
+.mapWrapper {
+	flex-grow: 1;
+}
+
+.spaceBetweend {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+	flex-grow: 0;
+	padding-top: 8px;
 }

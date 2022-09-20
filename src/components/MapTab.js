@@ -17,16 +17,40 @@ export default class MapTab extends React.Component {
 		return (
 			<div role="tabpanel" hidden={selectedTab !== tabIndex} id={`mapTab${tabIndex}`} aria-labelledby={`mapTab${tabIndex}`} className='tabPanel'>
 				{selectedTab === tabIndex && (
-					<Box sx={{width: '100%', height: '100%'}}>
-						<MapContainer center={Data[stateName].center} zoom={Data[stateName].zoom} scrollWheelZoom={true}>
-							<TileLayer
-								attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-								url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-							/>
-							<Bounds file={Data[stateName].stateBounds}/>
-							<Bounds file={Data[stateName].countyBounds}/>
-						</MapContainer>
-					</Box>)}
+					<div className='mapSubpane'>
+						<Box sx={{width: '100%', height: '100%'}} className='mapWrapper'>
+							<MapContainer center={Data[stateName].center} zoom={Data[stateName].zoom} scrollWheelZoom={true}>
+								<TileLayer
+									attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+									url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+								/>
+								<Bounds file={Data[stateName].stateBounds}/>
+								<Bounds file={Data[stateName].countyBounds}/>
+							</MapContainer>
+						</Box>
+
+						<div className='spaceBetweend'>
+							<div>
+								<input type='checkbox' id='county'/>
+								<label for='county'>County</label>
+							</div>
+
+							<div>
+								<input type='checkbox' id='currentDistricting' checked/>
+								<label for='currentDistricting'>Current Districting</label>
+							</div>
+
+							<div>
+								<input type='checkbox' id='redistricting'/>
+								<label for='redistricting'>Redistricting</label>
+							</div>
+
+							<div>
+								<input type='checkbox' id='precinct'/>
+								<label for='precinct'>Precinct</label>
+							</div>
+					</div>
+					</div>)}
 			</div>
 		);
 	}
