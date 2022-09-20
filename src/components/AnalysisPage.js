@@ -1,21 +1,13 @@
-/**
- * A class for showing the actual map of a state.
- */
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
-import React from 'react';
-import Box from '@mui/material/Box';
-import {MapContainer, TileLayer} from 'react-leaflet';
-
-import Data from './Data.js';
-import Bounds from './Bounds.js';
-
-export default class MapTab extends React.Component {
+export default class AnalysisPage extends React.Component {
 	render(){
-		const selectedTab = this.props.selectedTab;
-		const tabIndex = this.props.tabIndex;
 		const stateName = this.props.stateName;
+		const analysisType = this.props.analysisType;
+
 		return (
-			<div role="tabpanel" hidden={selectedTab !== tabIndex} id={`mapTab${tabIndex}`} aria-labelledby={`mapTab${tabIndex}`} className='tabPanely'>
+			<div role="tabpanel" hidden={selectedTab !== tabIndex} id={`analysisTab${tabIndex}`} aria-labelledby={`analysisTab${tabIndex}`} className='tabPanel'>
 				{selectedTab === tabIndex && (
 					<Box sx={{width: '100%', height: '100%'}}>
 						<MapContainer center={Data[stateName].center} zoom={Data[stateName].zoom} scrollWheelZoom={true}>
@@ -31,5 +23,3 @@ export default class MapTab extends React.Component {
 		);
 	}
 }
-
-

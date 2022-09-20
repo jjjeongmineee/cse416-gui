@@ -22,6 +22,7 @@ export default class Splash extends React.Component {
 		this.onChange = this.onChange.bind(this);
 
 		// The list of states currently implemented as a list of dictionaries containing a name and image
+		// @TODO: Change this to a list pulled from the server for adaptability
 		this.stateList = [{text: 'Louisiana', src: louisiana},
 							{text: 'Nevada', src: nevada},
 							{text: 'Mississippi', src: mississippi}];

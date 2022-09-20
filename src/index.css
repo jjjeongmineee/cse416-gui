@@ -103,6 +103,6 @@ html, body {
 	flex-direction: column;
 }
 
-.mapTab {
+.tabPanel {
 	flex-grow: 1;
 }
