@@ -25,8 +25,8 @@ export default class StatePage extends React.Component {
 				<div className='halfHolder'>
 					<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 						<Tabs value={mapSelectedTab} onChange={(e, v) => this.setState({mapSelectedTab: v})} aria-label="map tabs">
-							<Tab label="Current Districting Plan" id='cdp' ariaControls='cdp'/>
-							<Tab label="Multi-Member Districting Plan" id='mmd' ariaControls='mmd'/>
+							<Tab label="Current Districting Plan" id='cdp' aria-controls='cdp'/>
+							<Tab label="Multi-Member Districting Plan" id='mmd' aria-controls='mmd'/>
 						</Tabs>
 					</Box>
 
@@ -37,8 +37,8 @@ export default class StatePage extends React.Component {
 				<div className='halfHolder'>
 					<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 						<Tabs value={dataSelectedTab} onChange={(e, v) => this.setState({dataSelectedTab: v})} aria-label="data tabs">
-							<Tab label="Fairness Metrics" id='fm' ariaControls='fm'/>
-							<Tab label="Other stuff?" id='os' ariaControls='os'/>
+							<Tab label="Fairness Metrics" id='fm' aria-controls='fm'/>
+							<Tab label="Other stuff?" id='os' aria-controls='os'/>
 						</Tabs>
 					</Box>
 				</div>
