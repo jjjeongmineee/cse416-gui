@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import {useNavigate} from 'react-router-dom';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
@@ -12,7 +13,12 @@ import HomeIcon from '@mui/icons-material/Home';
 import MapTab from './MapTab.js';
 import AnalysisTab from './AnalysisTab.js';
 
-export default class StatePage extends React.Component {
+export default function StatePage(props){
+	const navigate = useNavigate();
+	return (<StatePageCore {...props} navigate={navigate}/>);
+}
+
+class StatePageCore extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {mapSelectedTab: 0, dataSelectedTab: 0};
@@ -22,11 +28,12 @@ export default class StatePage extends React.Component {
 		const stateName = this.props.stateName;
 		const mapSelectedTab = this.state.mapSelectedTab;
 		const dataSelectedTab = this.state.dataSelectedTab;
+		const navigate = this.props.navigate;
 
 		return (
 			<div className='stateRoot'>
 				<div className='stateBanner'>
-					<IconButton onClick={() => console.log("Home")}>
+					<IconButton onClick={() => navigate("/")}>
 						<HomeIcon/>
 					</IconButton>
 					<div className='stateLabel'>{stateName}</div>
@@ -47,11 +54,16 @@ export default class StatePage extends React.Component {
 					<div className='halfHolder'>
 						<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 							<Tabs value={dataSelectedTab} onChange={(e, v) => this.setState({dataSelectedTab: v})} aria-label="data tabs">
-								<Tab label="Fairness Metrics" id='fm' aria-controls='fm'/>
-								<Tab label="Other stuff?" id='os' aria-controls='os'/>
+								<Tab label="African American Population" id='fm' aria-controls='fm'/>
+								<Tab label="Hispanic Population" id='os' aria-controls='os'/>
+								<Tab label="Democratic Voters" id='os' aria-controls='os'/>
+								<Tab label="Republican Voters" id='os' aria-controls='os'/>
 							</Tabs>
 						</Box>
 						<AnalysisTab selectedTab={dataSelectedTab} tabIndex={0} stateName={stateName}/>
+						<AnalysisTab selectedTab={dataSelectedTab} tabIndex={1} stateName={stateName}/>
+						<AnalysisTab selectedTab={dataSelectedTab} tabIndex={2} stateName={stateName}/>
+						<AnalysisTab selectedTab={dataSelectedTab} tabIndex={3} stateName={stateName}/>
 					</div>
 				</div>
 			</div>

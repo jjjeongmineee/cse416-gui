@@ -28,7 +28,7 @@ export default Data = {
 	},
 	'Nevada': {
 		center: [38.629, -116.631],
-		zoom: 7,
+		zoom: 6,
 		stateBounds: nevadaStateBounds,
 		countyBounds: nevadaCountyBounds,
 		districtBounds: nevadaDistrictBounds
