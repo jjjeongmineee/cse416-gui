@@ -4,10 +4,9 @@
 
 import React from 'react';
 import Box from '@mui/material/Box';
-import {MapContainer, TileLayer} from 'react-leaflet';
+import {MapContainer, TileLayer, GeoJSON} from 'react-leaflet';
 
 import Data from './Data.js';
-import Bounds from './Bounds.js';
 
 export default class MapTab extends React.Component {
 	render(){
@@ -24,8 +23,8 @@ export default class MapTab extends React.Component {
 									attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 									url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 								/>
-								<Bounds file={Data[stateName].stateBounds}/>
-								<Bounds file={Data[stateName].countyBounds}/>
+								<GeoJSON file={Data[stateName].stateBounds}/>
+								<GeoJSON file={Data[stateName].countyBounds}/>
 							</MapContainer>
 						</Box>
 

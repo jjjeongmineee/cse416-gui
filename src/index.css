@@ -34,11 +34,13 @@ html, body {
 
 .splashRoot {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-around;
 	height: 100%;
 	width: 100%;
+	padding: 50px;
+	gap: 50px;
 }
 
 .images {
@@ -51,9 +53,12 @@ html, body {
 .thirdSquare {
 	width: 33%;
 	aspect-ratio: 1/1;
-	padding: 50px;
 	position: relative;
 	display: inline-block;
+}
+
+.thirdSquare:not(:last-child) {
+  margin-right: 16px;
 }
 
 .imgWrapper {
