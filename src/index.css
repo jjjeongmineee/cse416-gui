@@ -32,7 +32,7 @@ html, body {
 	height: 100%;
 }
 
-.splashRoot {
+.contentRoot {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -105,36 +105,11 @@ html, body {
 	flex-direction: column;
 }
 
-.stateBanner {
-	width: 100%;
-	flex-grow: 0;
-	background: var(--swatch-accent);
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	padding: 8px;
-}
-
-.stateLabel {
-	font-size: 18pt;
-	padding: 0px 16px;
-}
-
-.stateContent {
-	width: 100%;
-	flex: 1 1 auto;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	flex-direction: row;
-}
-
 .halfHolder {
 	width: 50%;
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	padding: 8px;
 }
 
 .tabPanel {

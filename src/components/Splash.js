@@ -14,6 +14,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 
 import ImageButton from './ImageButton.js';
+import Banner from './Banner.js';
 import Data from './Data.js';
 
 import louisiana from './images/louisiana.jpg';
@@ -54,34 +55,37 @@ class SplashLOC extends React.Component {
 		const effStateList = this.stateList.filter(e => e.text.toLowerCase().includes(searchStr));
 
 		return (
-			<div className='splashRoot'>
-				<Card sx={{flex: '1', height: '100%'}}>
-				<CardContent sx={{width: '100%', height: '100%'}}>
-						<MapContainer center={[39.8283, -98.5795]} zoom={3} dragging={false} scrollWheelZoom={false} attributionControl={false}>
-							<TileLayer
-								attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-								url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-							/>
-							{effStateList.map(e => (
-								<GeoJSON data={Data[e.text].stateBounds} style={{weight: 1}} onEachFeature={(f, l) => this.labelBounds(l, e.text)}/>
-							))}
-						</MapContainer>
-				</CardContent>
-				</Card>
+			<div className='stateRoot'>
+				<Banner title={"CSE 416 Team Muse"}/>
+				<div className='contentRoot'>
+					<Card sx={{flex: '1', height: '100%'}}>
+					<CardContent sx={{width: '100%', height: '100%'}}>
+							<MapContainer center={[39.8283, -98.5795]} zoom={3} dragging={false} scrollWheelZoom={false} attributionControl={false}>
+								<TileLayer
+									attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+									url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+								/>
+								{effStateList.map(e => (
+									<GeoJSON data={Data[e.text].stateBounds} style={{weight: 1}} onEachFeature={(f, l) => this.labelBounds(l, e.text)}/>
+								))}
+								</MapContainer>
+					</CardContent>
+					</Card>
 
-				<Card sx={{flex: '1'}}>
-				<CardContent>
-					<Box sx={{display: 'flex', alignItems: 'flex-end', padding: '0px 0px 8px 0px'}}>
-						<SearchIcon sx={{mr: 1, my: 0.5}}/>
-						<TextField id='search' label='Search for a state' variant='standard' type='search' onChange={this.onChange}/>
-					</Box>
-					<div className='images'>
-						{effStateList.map(e => (
-							<ImageButton text={e.text} src={e.src} route={'/' + e.text.toLowerCase()}key={e.text}/>
-						))}
-					</div>
-				</CardContent>
-				</Card>
+					<Card sx={{flex: '1'}}>
+					<CardContent>
+						<Box sx={{display: 'flex', alignItems: 'flex-end', padding: '0px 0px 8px 0px'}}>
+							<SearchIcon sx={{mr: 1, my: 0.5}}/>
+							<TextField id='search' label='Search for a state' variant='standard' type='search' onChange={this.onChange}/>
+						</Box>
+						<div className='images'>
+							{effStateList.map(e => (
+								<ImageButton text={e.text} src={e.src} route={'/' + e.text.toLowerCase()}key={e.text}/>
+							))}
+						</div>
+					</CardContent>
+					</Card>
+				</div>
 			</div>
 		)
 	}

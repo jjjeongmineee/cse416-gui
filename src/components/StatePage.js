@@ -9,7 +9,10 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import HomeIcon from '@mui/icons-material/Home';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 
+import Banner from './Banner.js';
 import MapTab from './MapTab.js';
 import AnalysisTab from './AnalysisTab.js';
 
@@ -32,14 +35,10 @@ class StatePageCore extends React.Component {
 
 		return (
 			<div className='stateRoot'>
-				<div className='stateBanner'>
-					<IconButton onClick={() => navigate("/")}>
-						<HomeIcon/>
-					</IconButton>
-					<div className='stateLabel'>{stateName}</div>
-				</div>
-				<div className='stateContent'>
-					<div className='halfHolder'>
+				<Banner title={stateName}/>
+				<div className='contentRoot'>
+					<Card sx={{flex: '1', height: '100%'}}>
+					<CardContent sx={{width: '100%', height: '100%', display: 'flex', flexDirection: 'column'}}>
 						<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 							<Tabs value={mapSelectedTab} onChange={(e, v) => this.setState({mapSelectedTab: v})} aria-label="map tabs">
 								<Tab label="Current Districting Plan" id='cdp' aria-controls='cdp'/>
@@ -49,9 +48,11 @@ class StatePageCore extends React.Component {
 
 						<MapTab selectedTab={mapSelectedTab} tabIndex={0} stateName={stateName}/>
 						<MapTab selectedTab={mapSelectedTab} tabIndex={1} stateName={stateName}/>
-					</div>
+					</CardContent>
+					</Card>
 
-					<div className='halfHolder'>
+					<Card sx={{flex: '1', height: '100%'}}>
+					<CardContent sx={{width: '100%', height: '100%'}}>
 						<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 							<Tabs value={dataSelectedTab} onChange={(e, v) => this.setState({dataSelectedTab: v})} aria-label="data tabs">
 								<Tab label="African American Population" id='fm' aria-controls='fm'/>
@@ -64,7 +65,8 @@ class StatePageCore extends React.Component {
 						<AnalysisTab selectedTab={dataSelectedTab} tabIndex={1} stateName={stateName}/>
 						<AnalysisTab selectedTab={dataSelectedTab} tabIndex={2} stateName={stateName}/>
 						<AnalysisTab selectedTab={dataSelectedTab} tabIndex={3} stateName={stateName}/>
-					</div>
+					</CardContent>
+					</Card>
 				</div>
 			</div>
 		);
