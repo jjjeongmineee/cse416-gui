@@ -56,11 +56,11 @@ class SplashLOC extends React.Component {
 
 		return (
 			<div className='stateRoot'>
-				<Banner title={"CSE 416 Team Muse"}/>
+				<Banner title={"CSE 416 Team Muze"}/>
 				<div className='contentRoot'>
 					<Card sx={{flex: '1', height: '100%'}}>
 					<CardContent sx={{width: '100%', height: '100%'}}>
-							<MapContainer center={[39.8283, -98.5795]} zoom={3} dragging={false} scrollWheelZoom={false} attributionControl={false}>
+							<MapContainer center={[39.8283, -98.5795]} zoom={4} dragging={false} scrollWheelZoom={false} attributionControl={false}>
 								<TileLayer
 									attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 									url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
