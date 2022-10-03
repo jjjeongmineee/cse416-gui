@@ -1,4 +1,4 @@
-# CSE 416 Team Muze GUI  
+# React/Client Side  
 
 ### Run this program using `npm start`
 
@@ -23,3 +23,8 @@ Clicking on a precinct leads into a different page with data about that precinct
 
 ### Goal 5
 Clicking on each states will lead to page showing data relevant to redistricting.
+
+# Java/Server Side
+
+### Initially run `javac` on all the objects to create .class files.
+### Then run `java` on the main where all files are executed to run the program. 
