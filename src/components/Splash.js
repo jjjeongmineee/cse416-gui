@@ -41,7 +41,9 @@ class SplashLOC extends React.Component {
 		this.stateImgMap = {'louisiana': louisiana, 'nevada': nevada, 'mississippi': mississippi};
 
 		// Get the list of currently implemented states from the server
-		axios.get("http://localhost:5000/muze-1.0-SNAPSHOT/data/states/list").then(res => this.setState({stateList: res.data}));
+		axios.get("http://localhost:5000/muze-1.0-SNAPSHOT/data/states/list")
+			.then(res => this.setState({stateList: res.data}))
+			.catch(e => console.log(e));
 	}
 
 	// Update the state's search string on change

@@ -27,8 +27,9 @@ class StatePageCore extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {mapSelectedTab: 0, dataSelectedTab: 0};
-		axios.get("http://localhost:5000/muze-1.0-SNAPSHOT/data/states/current").then(res => this.setState({currentBounds: JSON.parse(res.data.bounds), center: res.data.center, zoom: res.data.zoom}));
-//		axios.get("http://localhost:5000/muze-1.0-SNAPSHOT/data/states/current").then(res => console.log(res));
+		axios.get("http://localhost:5000/muze-1.0-SNAPSHOT/data/states/current")
+			.then(res => this.setState({currentBounds: JSON.parse(res.data.bounds), center: res.data.center, zoom: res.data.zoom}))
+			.catch(e => console.log(e));
 	}
 
 	render(){
