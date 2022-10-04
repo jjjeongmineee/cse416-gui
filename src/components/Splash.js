@@ -21,6 +21,8 @@ import louisiana from './images/louisiana.jpg';
 import nevada from './images/nevada.jpg';
 import mississippi from './images/mississippi.jpg';
 
+import axios from 'axios';
+
 export default function Splash(props){
 	const navigate = useNavigate();
 	return (<SplashLOC navigate={navigate} {...props}/>);
@@ -30,15 +32,16 @@ export default function Splash(props){
 class SplashLOC extends React.Component {
 	constructor(props){
 		super(props);
-		this.state = {searchStr: ''};
+		this.state = {searchStr: '', stateList: []};
 		this.onChange = this.onChange.bind(this);
 		this.labelBounds = this.labelBounds.bind(this);
+		this.onStateClicked = this.onStateClicked.bind(this);
 
-		// The list of states currently implemented as a list of dictionaries containing a name and image
-		// @TODO: Change this to a list pulled from the server for adaptability
-		this.stateList = [{text: 'Louisiana', src: louisiana},
-							{text: 'Nevada', src: nevada},
-							{text: 'Mississippi', src: mississippi}];
+		// A mapping of state names to images
+		this.stateImgMap = {'louisiana': louisiana, 'nevada': nevada, 'mississippi': mississippi};
+
+		// Get the list of currently implemented states from the server
+		axios.get("http://localhost:5000/muze-1.0-SNAPSHOT/data/states/list").then(res => this.setState({stateList: res.data}));
 	}
 
 	// Update the state's search string on change
@@ -46,13 +49,24 @@ class SplashLOC extends React.Component {
 
 	labelBounds = (layer, name) => {
 		layer.on('mouseover', e => layer.bindTooltip(name).openTooltip());
-		layer.on('click', e => this.props.navigate("/" + name.toLowerCase()));
+		layer.on('click', e => this.onStateClicked(name));
+	}
+
+	titleCase = str => str.split(' ').map(s => s[0].toUpperCase()+s.substring(1)).join(' ');
+
+	onStateClicked(stateName){
+		stateName = stateName.toLowerCase();
+		axios.get("http://localhost:5000/muze-1.0-SNAPSHOT/data/states/select/" + stateName).then(res => {
+			if (res.status === 200)
+				this.props.navigate("/" + stateName);
+		});
 	}
 
 	render(){
 		// Match the search string to the list of states (case insensitive)
 		const searchStr = this.state.searchStr.toLowerCase();
-		const effStateList = this.stateList.filter(e => e.text.toLowerCase().includes(searchStr));
+		console.log(this.state.stateList);
+		const effStateList = this.state.stateList.filter(e => e.toLowerCase().includes(searchStr));
 
 		return (
 			<div className='stateRoot'>
@@ -66,7 +80,7 @@ class SplashLOC extends React.Component {
 									url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 								/>
 								{effStateList.map(e => (
-									<GeoJSON data={Data[e.text].stateBounds} style={{weight: 1}} onEachFeature={(f, l) => this.labelBounds(l, e.text)}/>
+									<GeoJSON data={Data[e].stateBounds} style={{weight: 1}} onEachFeature={(f, l) => this.labelBounds(l, this.titleCase(e))}/>
 								))}
 								</MapContainer>
 					</CardContent>
@@ -80,7 +94,7 @@ class SplashLOC extends React.Component {
 						</Box>
 						<div className='images'>
 							{effStateList.map(e => (
-								<ImageButton text={e.text} src={e.src} route={'/' + e.text.toLowerCase()}key={e.text}/>
+								<ImageButton text={this.titleCase(e)} src={this.stateImgMap[e]} onClick={this.onStateClicked} key={e}/>
 							))}
 						</div>
 					</CardContent>

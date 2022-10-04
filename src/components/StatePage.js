@@ -16,6 +16,8 @@ import Banner from './Banner.js';
 import MapTab from './MapTab.js';
 import AnalysisTab from './AnalysisTab.js';
 
+import axios from 'axios';
+
 export default function StatePage(props){
 	const navigate = useNavigate();
 	return (<StatePageCore {...props} navigate={navigate}/>);
@@ -25,6 +27,8 @@ class StatePageCore extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {mapSelectedTab: 0, dataSelectedTab: 0};
+		axios.get("http://localhost:5000/muze-1.0-SNAPSHOT/data/states/current").then(res => this.setState({currentBounds: JSON.parse(res.data.bounds), center: res.data.center, zoom: res.data.zoom}));
+//		axios.get("http://localhost:5000/muze-1.0-SNAPSHOT/data/states/current").then(res => console.log(res));
 	}
 
 	render(){
@@ -32,6 +36,9 @@ class StatePageCore extends React.Component {
 		const mapSelectedTab = this.state.mapSelectedTab;
 		const dataSelectedTab = this.state.dataSelectedTab;
 		const navigate = this.props.navigate;
+		const currentBounds = this.state.currentBounds;
+		const center = this.state.center;
+		const zoom = this.state.zoom;
 
 		return (
 			<div className='stateRoot'>
@@ -46,8 +53,8 @@ class StatePageCore extends React.Component {
 							</Tabs>
 						</Box>
 
-						<MapTab selectedTab={mapSelectedTab} tabIndex={0} stateName={stateName}/>
-						<MapTab selectedTab={mapSelectedTab} tabIndex={1} stateName={stateName}/>
+						<MapTab selectedTab={mapSelectedTab} tabIndex={0} stateName={stateName} bounds={currentBounds} center={center} zoom={zoom}/>
+						<MapTab selectedTab={mapSelectedTab} tabIndex={1} stateName={stateName} bounds={currentBounds} center={center} zoom={zoom}/>
 					</CardContent>
 					</Card>
 

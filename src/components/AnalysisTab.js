@@ -34,7 +34,7 @@ export default class AnalysisTab extends React.Component {
 						</div>
 						<div className='pValHolder'>
 							{pVals.map((el) =>
-							<div className='paddedProgress'>
+							<div className='paddedProgress' key={el}>
 								<CircularProgressbar value={100-el*100} text={`p=${el}`} minValue={75} circleRatio={0.75} styles={buildStyles({
 									rotation: 0.625,
 									pathTransitionDuration: 0.5
