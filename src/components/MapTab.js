@@ -25,7 +25,8 @@ export default class MapTab extends React.Component {
 									attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 									url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 								/>
-								<GeoJSON data={bounds} style={{weight: 1}}/>
+								{bounds &&
+									<GeoJSON data={bounds} style={{weight: 1}}/>}
 							</MapContainer>
 						</Box>
 					</div>)}

@@ -19,26 +19,29 @@ import mississippiDistrictBounds from './geojson/mississippiDistrictBounds.json'
 
 var Data;
 export default Data = {
-	'louisiana': {
+	'Louisiana': {
 		center: [30.58, -92.32],
 		zoom: 7,
 		stateBounds: louisianaStateBounds,
 		countyBounds: louisianaCountyBounds,
-		districtBounds: louisianaDistrictBounds
+		districtBounds: louisianaDistrictBounds,
+		postal: 'LA'
 	},
-	'nevada': {
+	'Nevada': {
 		center: [38.629, -116.631],
 		zoom: 6,
 		stateBounds: nevadaStateBounds,
 		countyBounds: nevadaCountyBounds,
-		districtBounds: nevadaDistrictBounds
+		districtBounds: nevadaDistrictBounds,
+		postal: 'NE'
 	},
-	'mississippi': {
+	'Mississippi': {
 		center: [32.697, -89.655],
 		zoom: 7,
 		stateBounds: mississippiStateBounds,
 		countyBounds: mississippiCountyBounds,
-		districtBounds: mississippiDistrictBounds
+		districtBounds: mississippiDistrictBounds,
+		postal: 'MS'
 	}
 };
 

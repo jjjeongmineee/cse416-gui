@@ -15,6 +15,7 @@ import CardContent from '@mui/material/CardContent';
 import Banner from './Banner.js';
 import MapTab from './MapTab.js';
 import AnalysisTab from './AnalysisTab.js';
+import Data from './Data.js';
 
 import axios from 'axios';
 
@@ -27,9 +28,12 @@ class StatePageCore extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {mapSelectedTab: 0, dataSelectedTab: 0};
-		axios.get("http://localhost:5000/muze-1.0-SNAPSHOT/data/states/current")
-			.then(res => this.setState({currentBounds: JSON.parse(res.data.bounds), center: res.data.center, zoom: res.data.zoom}))
-			.catch(e => console.log(e));
+		axios.get("http://localhost:8000/muze/data/states/select/" + Data[this.props.stateName].postal).then(res => {
+			if (res.status === 200){
+				console.log(res.data);
+				this.setState({currentBounds: JSON.parse(res.data.bounds), center: res.data.center, zoom: res.data.zoom});
+			}
+		}).catch(e => console.log(e));
 	}
 
 	render(){
@@ -40,6 +44,8 @@ class StatePageCore extends React.Component {
 		const currentBounds = this.state.currentBounds;
 		const center = this.state.center;
 		const zoom = this.state.zoom;
+
+		console.log("Current bounds: ", currentBounds);
 
 		return (
 			<div className='stateRoot'>

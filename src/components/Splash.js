@@ -41,8 +41,11 @@ class SplashLOC extends React.Component {
 		this.stateImgMap = {'louisiana': louisiana, 'nevada': nevada, 'mississippi': mississippi};
 
 		// Get the list of currently implemented states from the server
-		axios.get("http://localhost:5000/muze-1.0-SNAPSHOT/data/states/list")
-			.then(res => this.setState({stateList: res.data}))
+		axios.get("http://localhost:8000/muze/data/states/list")
+			.then(res => {
+				this.setState({stateList: res.data});
+				console.log(res.data);
+			})
 			.catch(e => console.log(e));
 	}
 
@@ -57,11 +60,7 @@ class SplashLOC extends React.Component {
 	titleCase = str => str.split(' ').map(s => s[0].toUpperCase()+s.substring(1)).join(' ');
 
 	onStateClicked(stateName){
-		stateName = stateName.toLowerCase();
-		axios.get("http://localhost:5000/muze-1.0-SNAPSHOT/data/states/select/" + stateName).then(res => {
-			if (res.status === 200)
-				this.props.navigate("/" + stateName);
-		});
+		this.props.navigate("/" + stateName.toLowerCase());
 	}
 
 	render(){
