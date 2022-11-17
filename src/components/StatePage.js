@@ -30,7 +30,6 @@ class StatePageCore extends React.Component {
 		this.state = {mapSelectedTab: 0, dataSelectedTab: 0};
 		axios.get("http://localhost:8080/muze/data/states/select/" + Data[this.props.stateName].postal).then(res => {
 			if (res.status === 200){
-				console.log(res.data);
 				this.setState({currentBounds: JSON.parse(res.data.bounds), center: res.data.center, zoom: res.data.zoom});
 			}
 		}).catch(e => console.log(e));
@@ -45,9 +44,7 @@ class StatePageCore extends React.Component {
 		const center = this.state.center;
 		const zoom = this.state.zoom;
 
-		console.log("Current bounds: ", currentBounds);
-
-		return (
+		if (currentBounds != null) return (
 			<div className='stateRoot'>
 				<Banner title={stateName}/>
 				<div className='contentRoot'>
