@@ -41,7 +41,7 @@ export default Data = {
 		stateBounds: mississippiStateBounds,
 		countyBounds: mississippiCountyBounds,
 		districtBounds: mississippiDistrictBounds,
-		postal: 'MI'
+		postal: 'MS'
 	}
 };
 
