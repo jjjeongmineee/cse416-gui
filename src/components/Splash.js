@@ -41,7 +41,7 @@ class SplashLOC extends React.Component {
 		this.stateImgMap = {'louisiana': louisiana, 'nevada': nevada, 'mississippi': mississippi};
 
 		// Get the list of currently implemented states from the server
-		axios.get("http://localhost:8000/muze/data/states/list")
+		axios.get("http://localhost:8080/muze/data/states/list")
 			.then(res => {
 				this.setState({stateList: res.data});
 				console.log(res.data);
@@ -68,7 +68,6 @@ class SplashLOC extends React.Component {
 		const searchStr = this.state.searchStr.toLowerCase();
 		console.log(this.state.stateList);
 		const effStateList = this.state.stateList.filter(e => e.toLowerCase().includes(searchStr));
-
 		return (
 			<div className='stateRoot'>
 				<Banner title={"CSE 416 Team Muze"}/>
@@ -95,7 +94,7 @@ class SplashLOC extends React.Component {
 						</Box>
 						<div className='images'>
 							{effStateList.map(e => (
-								<ImageButton text={this.titleCase(e)} src={this.stateImgMap[e]} onClick={this.onStateClicked} key={e}/>
+								<ImageButton text={this.titleCase(e)} src={this.stateImgMap[e.toLowerCase()]} onClick={this.onStateClicked} key={e}/>
 							))}
 						</div>
 					</CardContent>
