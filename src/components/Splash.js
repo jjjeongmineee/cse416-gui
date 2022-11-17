@@ -67,7 +67,6 @@ class SplashLOC extends React.Component {
 		// Match the search string to the list of states (case insensitive)
 		const searchStr = this.state.searchStr.toLowerCase();
 		const effStateList = this.state.stateList.filter(e => e.toLowerCase().includes(searchStr));
-		console.log(effStateList);
 		return (
 			<div className='stateRoot'>
 				<Banner title={"CSE 416 Team Muze"}/>
