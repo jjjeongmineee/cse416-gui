@@ -41,11 +41,7 @@ class StatePageCore extends React.Component {
 		super(props);
 		this.state = {mapSelectedTab: 0, dataSelectedTab: 0, stateList: [], polTab: 0, racTab: 0};
 		// Get the list of currently implemented states from the server
-		axios.get("http://localhost:8080/muze/data/states/list")
-			.then(res => {
-				this.setState({stateList: res.data});
-				console.log(res.data);
-			}).catch(e => console.log(e));
+		
 		axios.get("http://localhost:8080/muze/data/states/select/" + Data[this.props.stateName].postal).then(res => {
 			if (res.status === 200){
 				this.setState({currentBounds: JSON.parse(res.data.bounds), center: res.data.center, zoom: res.data.zoom});
@@ -53,11 +49,20 @@ class StatePageCore extends React.Component {
 		}).catch(e => console.log(e));
 	}
 
+	visibilityCheck(tabNum) {
+		if (this.state.dataSelectedTab === 1)
+			if (this.state.polTab === tabNum)
+				return true;
+		if (this.state.dataSelectedTab === 2)
+			if (this.state.racTab === tabNum)
+				return true;
+		return false;
+	}
+
 	render(){
 		const stateName = this.props.stateName;
 		const mapSelectedTab = this.state.mapSelectedTab;
 		const dataSelectedTab = this.state.dataSelectedTab;
-		console.log(dataSelectedTab);
 		const navigate = this.props.navigate;
 		const currentBounds = this.state.currentBounds;
 		const center = this.state.center;
@@ -206,6 +211,8 @@ class StatePageCore extends React.Component {
 							<Tab label="Opportunity Districts" sx={{margin:"auto"}} id='fm' aria-controls='fm'/>
 							<Tab label="Box and whisker" sx={{margin:"auto"}} id='fm' aria-controls='fm'/>
 						</Tabs>
+
+						<div style={{visibility : this.visibilityCheck(0) ? "visible":"hidden"}}>Political Data Overview</div>
 					</CardContent>
 					</Card>
 				</div>
@@ -263,6 +270,8 @@ class StatePageCore extends React.Component {
 							<Tab label="White" sx={{margin:"auto"}} id='fm' aria-controls='fm'/>
 							<Tab label="Others" sx={{margin:"auto"}} id='fm' aria-controls='fm'/>
 						</Tabs>
+
+						<div style={{visibility : this.visibilityCheck(0) ? "visible":"hidden"}}>Racial Data Overview</div>
 					</CardContent>
 					</Card>
 				</div>
