@@ -11,6 +11,14 @@ import IconButton from '@mui/material/IconButton';
 import HomeIcon from '@mui/icons-material/Home';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
 
 import Banner from './Banner.js';
 import MapTab from './MapTab.js';
@@ -103,6 +111,38 @@ class StatePageCore extends React.Component {
 						<AnalysisTab selectedTab={dataSelectedTab} tabIndex={1} stateName={stateName}/>
 						<AnalysisTab selectedTab={dataSelectedTab} tabIndex={2} stateName={stateName}/>
 						<AnalysisTab selectedTab={dataSelectedTab} tabIndex={3} stateName={stateName}/>*/}
+						<TableContainer component={Paper}>
+						<Table sx={{ minWidth: 500 }} aria-label="simple table">
+							<TableHead>
+							<TableRow>
+								<TableCell sx={{margin:"auto", fontWeight:"bold"}}>Type of Data</TableCell>
+								<TableCell sx={{marginLeft:"100px", fontWeight:"bold"}}>Data Value</TableCell>
+							</TableRow>
+							</TableHead>
+							<TableBody>
+								<TableRow>
+								<TableCell sx={{margin:"auto"}} >Number of District Plans</TableCell>
+								<TableCell sx={{margin:"auto"}} >3</TableCell>
+								</TableRow>
+								<TableRow>
+								<TableCell sx={{margin:"auto"}}>Total Population</TableCell>
+								<TableCell sx={{margin:"auto"}}>10000000</TableCell>
+								</TableRow>
+								<TableRow>
+								<TableCell sx={{margin:"auto"}}>Republican/Democratic Split</TableCell>
+								<TableCell sx={{margin:"auto"}}>3000000 / 7000000</TableCell>
+								</TableRow>
+								<TableRow>
+								<TableCell sx={{margin:"auto"}}>Number of Opportunity Districts</TableCell>
+								<TableCell sx={{margin:"auto"}}>3</TableCell>
+								</TableRow>
+								<TableRow>
+								<TableCell sx={{margin:"auto"}}>District with Lowest Fairness</TableCell>
+								<TableCell sx={{margin:"auto"}}>3</TableCell>
+								</TableRow>
+							</TableBody>
+						</Table>
+						</TableContainer>
 					</CardContent>
 					</Card>
 				</div>
