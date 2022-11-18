@@ -50,13 +50,14 @@ class StatePageCore extends React.Component {
 	}
 
 	visibilityCheck(tabNum) {
+		let returnVal = false
 		if (this.state.dataSelectedTab === 1)
 			if (this.state.polTab === tabNum)
-				return true;
+				returnVal = true;
 		if (this.state.dataSelectedTab === 2)
 			if (this.state.racTab === tabNum)
-				return true;
-		return false;
+				returnVal = true;
+		return returnVal ? "visible" : "hidden";
 	}
 
 	render(){
@@ -212,7 +213,7 @@ class StatePageCore extends React.Component {
 							<Tab label="Box and whisker" sx={{margin:"auto"}} id='fm' aria-controls='fm'/>
 						</Tabs>
 
-						<div style={{visibility : this.visibilityCheck(0) ? "visible":"hidden"}}>Political Data Overview</div>
+						<div style={{visibility : this.visibilityCheck(0)}}>Political Data Overview</div>
 					</CardContent>
 					</Card>
 				</div>
@@ -271,7 +272,7 @@ class StatePageCore extends React.Component {
 							<Tab label="Others" sx={{margin:"auto"}} id='fm' aria-controls='fm'/>
 						</Tabs>
 
-						<div style={{visibility : this.visibilityCheck(0) ? "visible":"hidden"}}>Racial Data Overview</div>
+						<div style={{visibility : this.visibilityCheck(0)}}>Racial Data Overview</div>
 					</CardContent>
 					</Card>
 				</div>
