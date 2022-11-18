@@ -6,6 +6,7 @@ import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import { TabList, TabPanel } from '@mui/material';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import HomeIcon from '@mui/icons-material/Home';
@@ -38,7 +39,7 @@ export default function StatePage(props){
 class StatePageCore extends React.Component {
 	constructor(props){
 		super(props);
-		this.state = {mapSelectedTab: 0, dataSelectedTab: 0, stateList: []};
+		this.state = {mapSelectedTab: 0, dataSelectedTab: 0, stateList: [], polTab: 0, racTab: 0};
 		// Get the list of currently implemented states from the server
 		axios.get("http://localhost:8080/muze/data/states/list")
 			.then(res => {
@@ -62,6 +63,8 @@ class StatePageCore extends React.Component {
 		const center = this.state.center;
 		const zoom = this.state.zoom;
 		const planList = ["Single-Member Districting Plan", "Multi-Member Districting Plan"];
+		const polTab = this.state.polTab;
+		const racTab = this.state.racTab;
 
 
 		if (currentBounds != null && dataSelectedTab === 0) return (
@@ -196,6 +199,13 @@ class StatePageCore extends React.Component {
 						<AnalysisTab selectedTab={dataSelectedTab} tabIndex={1} stateName={stateName}/>
 						<AnalysisTab selectedTab={dataSelectedTab} tabIndex={2} stateName={stateName}/>
 						<AnalysisTab selectedTab={dataSelectedTab} tabIndex={3} stateName={stateName}/>*/}
+						<Tabs value={polTab} onChange={(e, v) => this.setState({polTab : v})}> 
+							<Tab label="Overview" sx={{margin:"auto"}} id='fm' aria-controls='fm'/>
+							<Tab label="Seat/Vote Share" sx={{margin:"auto"}} id='fm' aria-controls='fm'/>
+							<Tab label="R vs D" sx={{margin:"auto"}} id='fm' aria-controls='fm'/>
+							<Tab label="Opportunity Districts" sx={{margin:"auto"}} id='fm' aria-controls='fm'/>
+							<Tab label="Box and whisker" sx={{margin:"auto"}} id='fm' aria-controls='fm'/>
+						</Tabs>
 					</CardContent>
 					</Card>
 				</div>
@@ -245,7 +255,14 @@ class StatePageCore extends React.Component {
 								<Tab label="Racial" sx={{margin:"auto"}} id='os' aria-controls='os'/>
 							</Tabs>
 						</Box>
-						
+						<Tabs value={racTab} onChange={(e, v) => this.setState({racTab : v})}> 
+							<Tab label="Overview" sx={{margin:"auto"}} id='fm' aria-controls='fm'/>
+							<Tab label="African American" sx={{margin:"auto"}} id='fm' aria-controls='fm'/>
+							<Tab label="Asian American" sx={{margin:"auto"}} id='fm' aria-controls='fm'/>
+							<Tab label="Hispanic" sx={{margin:"auto"}} id='fm' aria-controls='fm'/>
+							<Tab label="White" sx={{margin:"auto"}} id='fm' aria-controls='fm'/>
+							<Tab label="Others" sx={{margin:"auto"}} id='fm' aria-controls='fm'/>
+						</Tabs>
 					</CardContent>
 					</Card>
 				</div>
