@@ -22,6 +22,7 @@ import nevada from './images/nevada.jpg';
 import mississippi from './images/mississippi.jpg';
 
 import axios from 'axios';
+import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 
 export default function Splash(props){
 	const navigate = useNavigate();
@@ -63,29 +64,31 @@ class SplashLOC extends React.Component {
 		this.props.navigate("/" + stateName.toLowerCase());
 	}
 
+	onStateSelected = (event) => this.onStateClicked(event.target.value);
+
 	render(){
 		// Match the search string to the list of states (case insensitive)
-		const searchStr = this.state.searchStr.toLowerCase();
-		const effStateList = this.state.stateList.filter(e => e.toLowerCase().includes(searchStr));
+		// const searchStr = this.state.searchStr.toLowerCase();
+		// const effStateList = this.state.stateList.filter(e => e.toLowerCase().includes(searchStr));
 		return (
 			<div className='stateRoot'>
 				<Banner title={"CSE 416 Team Muze"}/>
 				<div className='contentRoot'>
 					<Card sx={{flex: '1', height: '100%'}}>
 					<CardContent sx={{width: '100%', height: '100%'}}>
-							<MapContainer center={[39.8283, -98.5795]} zoom={4} dragging={false} scrollWheelZoom={false} attributionControl={false}>
+							<MapContainer center={[39.8283, -98.5795]} zoom={4} dragging={true} scrollWheelZoom={false} attributionControl={false}>
 								<TileLayer
 									attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 									url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 								/>
-								{effStateList.map(e => (
+								{this.state.stateList.map(e => (
 									<GeoJSON data={Data[e].stateBounds} style={{weight: 1}} onEachFeature={(f, l) => this.labelBounds(l, this.titleCase(e))}/>
 								))}
 								</MapContainer>
 					</CardContent>
 					</Card>
 
-					<Card sx={{flex: '1'}}>
+					{/* <Card sx={{flex: '1'}}>
 					<CardContent>
 						<Box sx={{display: 'flex', alignItems: 'flex-end', padding: '0px 0px 8px 0px'}}>
 							<SearchIcon sx={{mr: 1, my: 0.5}}/>
@@ -97,6 +100,28 @@ class SplashLOC extends React.Component {
 							))}
 						</div>
 					</CardContent>
+					</Card> */}
+					<Card sx={{flex: '1'}}>
+						<CardContent>
+							<Box sx={{display: 'flex', alignItems: 'flex-end', padding: '0px 0px 8px 0px'}}>
+								<FormControl fullWidth>
+									<InputLabel id="state-select-label">State</InputLabel>
+									<Select
+										labelId="state-select-label"
+										id="state-select"
+										value={this.state}
+										label="State"
+										onChange={this.onStateSelected}
+									>
+										{
+											this.state.stateList.map(e => (
+												<MenuItem value={this.titleCase(e)}>{this.titleCase(e)}</MenuItem>
+											))
+										}
+									</Select>
+								</FormControl>
+							</Box>
+						</CardContent>
 					</Card>
 				</div>
 			</div>
