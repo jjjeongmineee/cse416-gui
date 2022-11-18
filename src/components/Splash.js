@@ -23,6 +23,7 @@ import mississippi from './images/mississippi.jpg';
 
 import axios from 'axios';
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
+import {titleCase} from "./Utils";
 
 export default function Splash(props){
 	const navigate = useNavigate();
@@ -58,8 +59,6 @@ class SplashLOC extends React.Component {
 		layer.on('click', e => this.onStateClicked(name));
 	}
 
-	titleCase = str => str.split(' ').map(s => s[0].toUpperCase()+s.substring(1)).join(' ');
-
 	onStateClicked(stateName){
 		this.props.navigate("/" + stateName.toLowerCase());
 	}
@@ -72,7 +71,7 @@ class SplashLOC extends React.Component {
 		// const effStateList = this.state.stateList.filter(e => e.toLowerCase().includes(searchStr));
 		return (
 			<div className='stateRoot'>
-				<Banner title={"CSE 416 Team Muze"}/>
+				<Banner title={"CSE 416 Team Muze"} stateList={this.state.stateList}/>
 				<div className='contentRoot'>
 					<Card sx={{flex: '1', height: '100%'}}>
 					<CardContent sx={{width: '100%', height: '100%'}}>
@@ -82,7 +81,7 @@ class SplashLOC extends React.Component {
 									url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 								/>
 								{this.state.stateList.map(e => (
-									<GeoJSON data={Data[e].stateBounds} style={{weight: 1}} onEachFeature={(f, l) => this.labelBounds(l, this.titleCase(e))}/>
+									<GeoJSON data={Data[e].stateBounds} style={{weight: 1}} onEachFeature={(f, l) => this.labelBounds(l, titleCase(e))}/>
 								))}
 								</MapContainer>
 					</CardContent>
@@ -101,28 +100,7 @@ class SplashLOC extends React.Component {
 						</div>
 					</CardContent>
 					</Card> */}
-					<Card sx={{flex: '1'}}>
-						<CardContent>
-							<Box sx={{display: 'flex', alignItems: 'flex-end', padding: '0px 0px 8px 0px'}}>
-								<FormControl fullWidth>
-									<InputLabel id="state-select-label">State</InputLabel>
-									<Select
-										labelId="state-select-label"
-										id="state-select"
-										value={this.state}
-										label="State"
-										onChange={this.onStateSelected}
-									>
-										{
-											this.state.stateList.map(e => (
-												<MenuItem value={this.titleCase(e)}>{this.titleCase(e)}</MenuItem>
-											))
-										}
-									</Select>
-								</FormControl>
-							</Box>
-						</CardContent>
-					</Card>
+
 				</div>
 			</div>
 		)

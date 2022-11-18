@@ -30,8 +30,13 @@ export default function StatePage(props){
 class StatePageCore extends React.Component {
 	constructor(props){
 		super(props);
-
-		this.state = {mapSelectedTab: 0, dataSelectedTab: 0};
+		this.state = {mapSelectedTab: 0, dataSelectedTab: 0, stateList: []};
+		// Get the list of currently implemented states from the server
+		axios.get("http://localhost:8080/muze/data/states/list")
+			.then(res => {
+				this.setState({stateList: res.data});
+				console.log(res.data);
+			}).catch(e => console.log(e));
 		axios.get("http://localhost:8080/muze/data/states/select/" + Data[this.props.stateName].postal).then(res => {
 			if (res.status === 200){
 				this.setState({currentBounds: JSON.parse(res.data.bounds), center: res.data.center, zoom: res.data.zoom});
@@ -53,7 +58,7 @@ class StatePageCore extends React.Component {
 
 		if (currentBounds != null && dataSelectedTab === 0) return (
 			<div className='stateRoot'>
-				<Banner title={stateName}/>
+				<Banner title={stateName} stateList={this.state.stateList}/>
 				<div className='contentRoot'>
 					<Card sx={{flex: '1', height: '100%'}}>
 					<CardContent sx={{width: '100%', height: '100%', display: 'flex', flexDirection: 'column'}}>
