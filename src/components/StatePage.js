@@ -111,7 +111,7 @@ class StatePageCore extends React.Component {
 
 		if (currentBounds != null && dataSelectedTab === 1) return (
 			<div className='stateRoot'>
-				<Banner title={stateName}/>
+				<Banner title={stateName} stateList={this.state.stateList}/>
 				<div className='contentRoot'>
 					<Card sx={{flex: '1', height: '100%'}}>
 					<CardContent sx={{width: '100%', height: '100%', display: 'flex', flexDirection: 'column'}}>
@@ -164,7 +164,7 @@ class StatePageCore extends React.Component {
 
 		if (currentBounds != null && dataSelectedTab === 2) return (
 			<div className='stateRoot'>
-				<Banner title={stateName}/>
+				<Banner title={stateName} stateList={this.state.stateList}/>
 				<div className='contentRoot'>
 					<Card sx={{flex: '1', height: '100%'}}>
 					<CardContent sx={{width: '100%', height: '100%', display: 'flex', flexDirection: 'column'}}>
