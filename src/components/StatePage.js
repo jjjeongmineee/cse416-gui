@@ -41,8 +41,14 @@ class StatePageCore extends React.Component {
 		super(props);
 		this.state = {mapSelectedTab: 0, dataSelectedTab: 0, stateList: [], polTab: 0, racTab: 0};
 		// Get the list of currently implemented states from the server
-		
-		axios.get("http://localhost:8080/muze/data/states/select/" + Data[this.props.stateName].postal).then(res => {
+		const stateListApi = axios.get("http://localhost:8080/muze/data/states/list");
+		const selectedStateApi = axios.get("http://localhost:8080/muze/data/states/select/" + Data[this.props.stateName].postal);
+
+		stateListApi.then(res => {
+			this.setState({stateList: res.data});
+			console.log(res.data);
+		}).catch(e => console.log(e));
+		selectedStateApi.then(res => {
 			if (res.status === 200){
 				this.setState({currentBounds: JSON.parse(res.data.bounds), center: res.data.center, zoom: res.data.zoom});
 			}
@@ -95,7 +101,7 @@ class StatePageCore extends React.Component {
 									}
 								</Select>
 							</FormControl>
-							
+
 							{/*<Tabs value={mapSelectedTab} onChange={(e, v) => this.setState({mapSelectedTab: v})} aria-label="map tabs">
 								<Tab label="Current Districting Plan" id='cdp' aria-controls='cdp'/>
 								<Tab label="Multi-Member Districting Plan" id='mmd' aria-controls='mmd'/>
@@ -180,7 +186,7 @@ class StatePageCore extends React.Component {
 									}
 								</Select>
 							</FormControl>
-							
+
 							{/*<Tabs value={mapSelectedTab} onChange={(e, v) => this.setState({mapSelectedTab: v})} aria-label="map tabs">
 								<Tab label="Current Districting Plan" id='cdp' aria-controls='cdp'/>
 								<Tab label="Multi-Member Districting Plan" id='mmd' aria-controls='mmd'/>
@@ -205,7 +211,7 @@ class StatePageCore extends React.Component {
 						<AnalysisTab selectedTab={dataSelectedTab} tabIndex={1} stateName={stateName}/>
 						<AnalysisTab selectedTab={dataSelectedTab} tabIndex={2} stateName={stateName}/>
 						<AnalysisTab selectedTab={dataSelectedTab} tabIndex={3} stateName={stateName}/>*/}
-						<Tabs value={polTab} onChange={(e, v) => this.setState({polTab : v})}> 
+						<Tabs value={polTab} onChange={(e, v) => this.setState({polTab : v})}>
 							<Tab label="Overview" sx={{margin:"auto"}} id='fm' aria-controls='fm'/>
 							<Tab label="Seat/Vote Share" sx={{margin:"auto"}} id='fm' aria-controls='fm'/>
 							<Tab label="R vs D" sx={{margin:"auto"}} id='fm' aria-controls='fm'/>
@@ -242,7 +248,7 @@ class StatePageCore extends React.Component {
 									}
 								</Select>
 							</FormControl>
-							
+
 							{/*<Tabs value={mapSelectedTab} onChange={(e, v) => this.setState({mapSelectedTab: v})} aria-label="map tabs">
 								<Tab label="Current Districting Plan" id='cdp' aria-controls='cdp'/>
 								<Tab label="Multi-Member Districting Plan" id='mmd' aria-controls='mmd'/>
@@ -263,7 +269,7 @@ class StatePageCore extends React.Component {
 								<Tab label="Racial" sx={{margin:"auto"}} id='os' aria-controls='os'/>
 							</Tabs>
 						</Box>
-						<Tabs value={racTab} onChange={(e, v) => this.setState({racTab : v})}> 
+						<Tabs value={racTab} onChange={(e, v) => this.setState({racTab : v})}>
 							<Tab label="Overview" sx={{margin:"auto"}} id='fm' aria-controls='fm'/>
 							<Tab label="African American" sx={{margin:"auto"}} id='fm' aria-controls='fm'/>
 							<Tab label="Asian American" sx={{margin:"auto"}} id='fm' aria-controls='fm'/>

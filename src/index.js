@@ -8,7 +8,7 @@ import reportWebVitals from './reportWebVitals';
 
 // THIS FUNCTION TESTS TO SEE IF THIS APP HAS
 // DATA IN LOCAL STORAGE. IF IT DOES, TRUE IS
-// RETURNED, ELSE FALSE 
+// RETURNED, ELSE FALSE
 function isInLocalStorage() {
 	return localStorage.getItem("top5-data") != null;
 }
@@ -35,7 +35,7 @@ function loadListsFromJSON(jsonFilePath) {
 					"counter" : 3,
 					"keyNamePairs" : [
 						{"key": "0", "name": "Games"},
-						{"key": "1", "name": "Movies"}, 
+						{"key": "1", "name": "Movies"},
 						{"key": "2", "name": "Pink Floyd Songs"}
 					]
 			}));
