@@ -17,8 +17,12 @@ export default function Banner(props) {
 	const handleOpenStateMenu = (event) => {
 		setAnchorElState(event.currentTarget);
 	};
-	const handleSelectStateMenu = (state) => {
+	const handleSelectStateMenu = (event) => {
 		setAnchorElState(null);
+		const state = event.target.innerText;
+		if(state == null || state === '') {
+			return;
+		}
 		navigate("/" + state.toLowerCase());
 		window.location.reload(false);
 	};
@@ -56,7 +60,7 @@ export default function Banner(props) {
 							onClose={handleSelectStateMenu}
 						>
 							{stateList.map((state) => (
-								<MenuItem value={state} onClick={handleSelectStateMenu.bind(this, state)}>
+								<MenuItem value={state} onClick={handleSelectStateMenu}>
 									<Typography textAlign="center">{state}</Typography>
 								</MenuItem>
 							))}
