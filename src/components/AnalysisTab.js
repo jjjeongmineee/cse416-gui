@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import {buildStyles, CircularProgressbar} from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
-import aaPercent from './images/aaPercent.png';
+import aaPercent from '../data/images/aaPercent.png';
 
 export default class AnalysisTab extends React.Component {
 	pValueToPercent(p){

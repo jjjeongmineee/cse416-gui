@@ -4,7 +4,7 @@
 
 import React from 'react';
 import Box from '@mui/material/Box';
-import {MapContainer, TileLayer, GeoJSON} from 'react-leaflet';
+import {GeoJSON, MapContainer, TileLayer} from 'react-leaflet';
 
 export default class MapTab extends React.Component {
 	render(){

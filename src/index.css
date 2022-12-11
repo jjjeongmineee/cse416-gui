@@ -5,16 +5,16 @@
 }
 
 :root {
-  /* 
+  /*
         FIRST WE'LL DEFINE OUR SWATCHES, i.e. THE COMPLEMENTARY
         COLORS THAT WE'LL USE TOGETHER IN MULTIPLE PLACES THAT
         TOGETHER WILL MAKE UP A GIVEN THEME
     */
-  --swatch-foundation: #efefef; 
-  --swatch-primary: #e6e6e6; 
+  --swatch-foundation: #efefef;
+  --swatch-primary: #e6e6e6;
   --swatch-complement: #e1e4cb;
-  --swatch-contrast: #111111; 
-  --swatch-accent: #42a5f5; 
+  --swatch-contrast: #111111;
+  --swatch-accent: #42a5f5;
   --swatch-status: #123456;
   --my-font-family: "Robaaaoto";
   --bounceEasing: cubic-bezier(0.51, 0.92, 0.24, 1.15);
@@ -73,7 +73,7 @@ html, body {
 	transform: scale(1.01);
 	width: 100%;
 	height: 100%;
-	object-fit: cover;	
+	object-fit: cover;
 	object-position: 50% 50%;
 }
 
