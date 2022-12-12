@@ -1,11 +1,16 @@
-import {useRecoilValue} from "recoil";
-import {statePlanAtom} from "../atom";
+import {useRecoilState} from "recoil";
+import {boundsAtom} from "../atom";
 import {GeoJSON} from "react-leaflet";
+import {useEffect} from "react";
 
 export function Bound() {
-    const statePlan = useRecoilValue(statePlanAtom);
+    const [bounds, setBounds] = useRecoilState(boundsAtom);
+
+    useEffect(() => {
+
+    });
 
     return (
-        statePlan.bounds && <GeoJSON data={statePlan.bounds} style={{weight: 1}}/>
+        bounds && <GeoJSON data={bounds} style={{weight: 1}}/>
     );
 }

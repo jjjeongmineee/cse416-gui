@@ -1,19 +1,21 @@
-import React, {Suspense} from "react";
+import React from "react";
 import DistrictPlanTypeSelector from "./DistrctPlanTypeSelector";
 import {Button, Card, CardContent} from "@mui/material";
-import {DataType, PlanType} from "../data/constants";
+import {PlanType} from "../data/constants";
 import {useSetRecoilState} from "recoil";
-import {dataTypeAtom, planTypeAtom} from "../atom";
+import {mmdPlanIdxAtom, planTypeAtom, smdPlanIdxAtom} from "../atom";
 import {SmdTabPanels} from "./SmdTabPanels";
 import {MmdTabPanels} from "./MmdTabPanels";
 
 export default function DistrictPlanInformationTabs() {
     const setPlanType = useSetRecoilState(planTypeAtom);
-    const setDataType = useSetRecoilState(dataTypeAtom);
+    const setSmdPlanIdx = useSetRecoilState(smdPlanIdxAtom);
+    const setMmdPlanIdx = useSetRecoilState(mmdPlanIdxAtom);
 
     const handleReset = () => {
         setPlanType(PlanType.SMD);
-        setDataType(DataType.SUMMARY);
+        setSmdPlanIdx(0);
+        setMmdPlanIdx(0);
     }
 
     return (
@@ -21,10 +23,8 @@ export default function DistrictPlanInformationTabs() {
             <CardContent sx={{width: '100%', height: '100%'}}>
                 <Button variant="outlined" onClick={handleReset}>Reset State</Button>
                 <DistrictPlanTypeSelector/>
-                <Suspense>
-                    <SmdTabPanels/>
-                    <MmdTabPanels/>
-                </Suspense>
+                <SmdTabPanels/>
+                <MmdTabPanels/>
             </CardContent>
         </Card>
 

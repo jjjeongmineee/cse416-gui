@@ -6,47 +6,62 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import React from "react";
+import {useRecoilValue} from "recoil";
+import {planTypeAtom} from "../atom";
+import {Card, CardContent, CardHeader} from "@mui/material";
+import {PlanType} from "../data/constants";
 
 export default function SummaryTable({summary}) {
+    const planType = useRecoilValue(planTypeAtom);
+
     return (
-        <TableContainer component={Paper}>
-            <Table sx={{minWidth: 500}} aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell sx={{margin: "auto", fontWeight: "bold"}}>Type of
-                            Data</TableCell>
-                        <TableCell sx={{marginLeft: "100px", fontWeight: "bold"}}>Data
-                            Value</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    <TableRow>
-                        <TableCell sx={{margin: "auto"}}>Number of District Plans</TableCell>
-                        {/*<TableCell sx={{margin: "auto"}}>{summary.numOfDistrictPlan}</TableCell>*/}
-                        <TableCell sx={{margin: "auto"}}>{1}</TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell sx={{margin: "auto"}}>Average Number of Majority-Minority Representatives per Plan</TableCell>
-                        {/*<TableCell sx={{margin: "auto"}}>{summary.avgNumOfMajorMinorRepPerPlan}</TableCell>*/}
-                        <TableCell sx={{margin: "auto"}}>{1}</TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell sx={{margin: "auto"}}>Average Equal Population Measure</TableCell>
-                        {/*<TableCell sx={{margin: "auto"}}>{summary.avgEqualPopulationMeasure}</TableCell>*/}
-                        <TableCell sx={{margin: "auto"}}>{1}</TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell sx={{margin: "auto"}}>Average Polsby-Popper Value</TableCell>
-                        {/*<TableCell sx={{margin: "auto"}}>{summary.avgPolsbyPopperValue}</TableCell>*/}
-                        <TableCell sx={{margin: "auto"}}>{1}</TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell sx={{margin: "auto"}}>Average Republican/Democratic Split</TableCell>
-                        {/*<TableCell sx={{margin: "auto"}}>{summary.avgRepDemSplit}</TableCell>*/}
-                        <TableCell sx={{margin: "auto"}}>{1}</TableCell>
-                    </TableRow>
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <div>
+            <TableContainer component={Paper} sx={{marginBottom: "50px"}}>
+                <Table sx={{minWidth: 500}} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell sx={{margin: "auto", fontWeight: "bold"}}>Type of
+                                Data</TableCell>
+                            <TableCell sx={{marginLeft: "100px", fontWeight: "bold"}}>Data
+                                Value</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        <TableRow>
+                            <TableCell sx={{margin: "auto"}}>Number of District Plans</TableCell>
+                            {/*<TableCell sx={{margin: "auto"}}>{summary.numOfDistrictPlan}</TableCell>*/}
+                            <TableCell sx={{margin: "auto"}}>{1}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell sx={{margin: "auto"}}>Average Number of Majority-Minority Representatives per
+                                Plan</TableCell>
+                            {/*<TableCell sx={{margin: "auto"}}>{summary.avgNumOfMajorMinorRepPerPlan}</TableCell>*/}
+                            <TableCell sx={{margin: "auto"}}>{1}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell sx={{margin: "auto"}}>Average Equal Population Measure</TableCell>
+                            {/*<TableCell sx={{margin: "auto"}}>{summary.avgEqualPopulationMeasure}</TableCell>*/}
+                            <TableCell sx={{margin: "auto"}}>{1}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell sx={{margin: "auto"}}>Average Polsby-Popper Value</TableCell>
+                            {/*<TableCell sx={{margin: "auto"}}>{summary.avgPolsbyPopperValue}</TableCell>*/}
+                            <TableCell sx={{margin: "auto"}}>{1}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell sx={{margin: "auto"}}>Average Republican/Democratic Split</TableCell>
+                            {/*<TableCell sx={{margin: "auto"}}>{summary.avgRepDemSplit}</TableCell>*/}
+                            <TableCell sx={{margin: "auto"}}>{1}</TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <Card hidden={planType !== PlanType.MMD}>
+                <CardHeader title="Summary Layout"/>
+                <CardContent>
+                    <p>5</p>
+                </CardContent>
+            </Card>
+        </div>
     );
 }
