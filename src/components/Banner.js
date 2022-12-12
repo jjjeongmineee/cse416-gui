@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
@@ -8,12 +8,20 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import {Menu, MenuItem, Tooltip} from "@mui/material";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import {stateListQuery} from "../api/state";
-import {useRecoilValue} from "recoil";
+import axios from "axios";
 
 export default function Banner(props) {
     const navigate = useNavigate();
-    const stateList = useRecoilValue(stateListQuery);
+    const [stateList, setStateList] = useState([]);
+    useEffect(() => {
+        axios.get("http://localhost:8080/muze/data/states/list")
+            .then(res => {
+                setStateList(res.data);
+            })
+            .catch(e => {
+                console.log(e)
+            });
+    }, []);
 
     const [anchorElState, setAnchorElState] = React.useState(null);
 

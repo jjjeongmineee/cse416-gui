@@ -7,7 +7,7 @@ import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import React from "react";
 
-export default function RacialTable() {
+export default function RacialTable({racial}) {
     return (
         <TableContainer component={Paper}>
             <Table sx={{minWidth: 500}} aria-label="simple table">
@@ -22,27 +22,33 @@ export default function RacialTable() {
                 <TableBody>
                     <TableRow>
                         <TableCell sx={{margin: "auto"}}>Overview</TableCell>
-                        <TableCell sx={{margin: "auto"}}>3</TableCell>
+                        {/*<TableCell sx={{margin: "auto"}}>{racial.overview}</TableCell>*/}
+                        <TableCell sx={{margin: "auto"}}>{3}</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell sx={{margin: "auto"}}>African-American</TableCell>
-                        <TableCell sx={{margin: "auto"}}>10000000</TableCell>
+                        {/*<TableCell sx={{margin: "auto"}}>{racial.africanAmerican}</TableCell>*/}
+                        <TableCell sx={{margin: "auto"}}>{3}</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell sx={{margin: "auto"}}>Asian-American</TableCell>
-                        <TableCell sx={{margin: "auto"}}>3000000 / 7000000</TableCell>
+                        {/*<TableCell sx={{margin: "auto"}}>{racial.asianAmerican}</TableCell>*/}
+                        <TableCell sx={{margin: "auto"}}>{3}</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell sx={{margin: "auto"}}>Hispanic</TableCell>
-                        <TableCell sx={{margin: "auto"}}>3</TableCell>
+                        {/*<TableCell sx={{margin: "auto"}}>{racial.hispanic}</TableCell>*/}
+                        <TableCell sx={{margin: "auto"}}>{3}</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell sx={{margin: "auto"}}>White</TableCell>
-                        <TableCell sx={{margin: "auto"}}>3</TableCell>
+                        {/*<TableCell sx={{margin: "auto"}}>{racial.white}</TableCell>*/}
+                        <TableCell sx={{margin: "auto"}}>{3}</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell sx={{margin: "auto"}}>Others</TableCell>
-                        <TableCell sx={{margin: "auto"}}>3</TableCell>
+                        {/*<TableCell sx={{margin: "auto"}}>{racial.others}</TableCell>*/}
+                        <TableCell sx={{margin: "auto"}}>{3}</TableCell>
                     </TableRow>
                 </TableBody>
             </Table>

@@ -7,7 +7,7 @@ import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import React from "react";
 
-export default function PoliticalTable() {
+export default function PoliticalTable({political}) {
     return (
         <TableContainer component={Paper}>
             <Table sx={{minWidth: 500}} aria-label="simple table">
@@ -22,23 +22,28 @@ export default function PoliticalTable() {
                 <TableBody>
                     <TableRow>
                         <TableCell sx={{margin: "auto"}}>Overview</TableCell>
-                        <TableCell sx={{margin: "auto"}}>3</TableCell>
+                        {/*<TableCell sx={{margin: "auto"}}>{political.overview}</TableCell>*/}
+                        <TableCell sx={{margin: "auto"}}>{2}</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell sx={{margin: "auto"}}>Seat/Vote Share</TableCell>
-                        <TableCell sx={{margin: "auto"}}>10000000</TableCell>
+                        {/*<TableCell sx={{margin: "auto"}}>{political.seatVoteShare}</TableCell>*/}
+                        <TableCell sx={{margin: "auto"}}>{2}</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell sx={{margin: "auto"}}>Republican VS Democratic</TableCell>
-                        <TableCell sx={{margin: "auto"}}>3000000 / 7000000</TableCell>
+                        {/*<TableCell sx={{margin: "auto"}}>{political.repVsDem}</TableCell>*/}
+                        <TableCell sx={{margin: "auto"}}>{2}</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell sx={{margin: "auto"}}>Opportunity</TableCell>
-                        <TableCell sx={{margin: "auto"}}>3</TableCell>
+                        {/*<TableCell sx={{margin: "auto"}}>{political.opportunity}</TableCell>*/}
+                        <TableCell sx={{margin: "auto"}}>{2}</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell sx={{margin: "auto"}}>Box and Whisker</TableCell>
-                        <TableCell sx={{margin: "auto"}}>3</TableCell>
+                        {/*<TableCell sx={{margin: "auto"}}>{political.boxAndWhisker}</TableCell>*/}
+                        <TableCell sx={{margin: "auto"}}>{2}</TableCell>
                     </TableRow>
                 </TableBody>
             </Table>

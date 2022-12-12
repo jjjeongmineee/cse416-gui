@@ -1,17 +1,9 @@
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import Box from "@mui/material/Box";
 import React from "react";
-import {atom, useRecoilState} from "recoil";
-
-const PlanType = {
-    SMD: "Single-Member District",
-    MMD: "Multi-Member District"
-};
-
-const planTypeAtom = atom({
-    key: 'planTypeAtom',
-    default: PlanType.SMD
-});
+import {PlanType} from "../data/constants";
+import {useRecoilState, useRecoilValue} from "recoil";
+import {planTypeAtom} from "../atom";
 
 export default function DistrictPlanTypeSelector() {
     const [planType, setPlanType] = useRecoilState(planTypeAtom);

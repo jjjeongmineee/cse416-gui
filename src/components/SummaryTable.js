@@ -7,7 +7,7 @@ import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import React from "react";
 
-export default function SummaryTable() {
+export default function SummaryTable({summary}) {
     return (
         <TableContainer component={Paper}>
             <Table sx={{minWidth: 500}} aria-label="simple table">
@@ -22,23 +22,28 @@ export default function SummaryTable() {
                 <TableBody>
                     <TableRow>
                         <TableCell sx={{margin: "auto"}}>Number of District Plans</TableCell>
-                        <TableCell sx={{margin: "auto"}}>3</TableCell>
+                        {/*<TableCell sx={{margin: "auto"}}>{summary.numOfDistrictPlan}</TableCell>*/}
+                        <TableCell sx={{margin: "auto"}}>{1}</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell sx={{margin: "auto"}}>Average Number of Majority-Minority Representatives per Plan</TableCell>
-                        <TableCell sx={{margin: "auto"}}>10000000</TableCell>
+                        {/*<TableCell sx={{margin: "auto"}}>{summary.avgNumOfMajorMinorRepPerPlan}</TableCell>*/}
+                        <TableCell sx={{margin: "auto"}}>{1}</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell sx={{margin: "auto"}}>Average Equal Population Measure</TableCell>
-                        <TableCell sx={{margin: "auto"}}>3000000 / 7000000</TableCell>
+                        {/*<TableCell sx={{margin: "auto"}}>{summary.avgEqualPopulationMeasure}</TableCell>*/}
+                        <TableCell sx={{margin: "auto"}}>{1}</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell sx={{margin: "auto"}}>Average Polsby-Popper Value</TableCell>
-                        <TableCell sx={{margin: "auto"}}>3</TableCell>
+                        {/*<TableCell sx={{margin: "auto"}}>{summary.avgPolsbyPopperValue}</TableCell>*/}
+                        <TableCell sx={{margin: "auto"}}>{1}</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell sx={{margin: "auto"}}>Average Republican/Democratic Split</TableCell>
-                        <TableCell sx={{margin: "auto"}}>3</TableCell>
+                        {/*<TableCell sx={{margin: "auto"}}>{summary.avgRepDemSplit}</TableCell>*/}
+                        <TableCell sx={{margin: "auto"}}>{1}</TableCell>
                     </TableRow>
                 </TableBody>
             </Table>
