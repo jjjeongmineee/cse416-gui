@@ -6,7 +6,7 @@ import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 
-export function DistrictPlanTable({districtPlan}) {
+export function DistrictPlanTable({summary}) {
     return (
         <TableContainer component={Paper}>
             <Table sx={{minWidth: 500}} aria-label="simple table">
@@ -21,38 +21,32 @@ export function DistrictPlanTable({districtPlan}) {
                 <TableBody>
                     <TableRow>
                         <TableCell sx={{margin: "auto"}}>Number of Districts</TableCell>
-                        {/*<TableCell sx={{margin: "auto"}}>{summary.numOfDistrictPlan}</TableCell>*/}
-                        <TableCell sx={{margin: "auto"}}>{1}</TableCell>
+                        {summary && <TableCell sx={{margin: "auto"}}>{summary.numOfDistricts}</TableCell>}
                     </TableRow>
                     <TableRow>
                         <TableCell sx={{margin: "auto"}}>Summary of Each District in the Plan</TableCell>
-                        {/*<TableCell sx={{margin: "auto"}}>{summary.avgNumOfMajorMinorRepPerPlan}</TableCell>*/}
-                        <TableCell sx={{margin: "auto"}}>{1}</TableCell>
+                        {summary &&
+                            <TableCell sx={{margin: "auto"}}>{summary.summaryOfEachDistrictInThePlan}</TableCell>}
                     </TableRow>
                     <TableRow>
                         <TableCell sx={{margin: "auto"}}>Republican/Democratic Split</TableCell>
-                        {/*<TableCell sx={{margin: "auto"}}>{summary.avgEqualPopulationMeasure}</TableCell>*/}
-                        <TableCell sx={{margin: "auto"}}>{1}</TableCell>
+                        {summary && <TableCell sx={{margin: "auto"}}>{summary.repDemSplit}</TableCell>}
                     </TableRow>
                     <TableRow>
                         <TableCell sx={{margin: "auto"}}>Election from which Voting Preference is used</TableCell>
-                        {/*<TableCell sx={{margin: "auto"}}>{summary.avgPolsbyPopperValue}</TableCell>*/}
-                        <TableCell sx={{margin: "auto"}}>{1}</TableCell>
+                        {summary && <TableCell sx={{margin: "auto"}}>{summary.election}</TableCell>}
                     </TableRow>
                     <TableRow>
                         <TableCell sx={{margin: "auto"}}>Number of Opportunity Districts</TableCell>
-                        {/*<TableCell sx={{margin: "auto"}}>{summary.avgRepDemSplit}</TableCell>*/}
-                        <TableCell sx={{margin: "auto"}}>{1}</TableCell>
+                        {summary && <TableCell sx={{margin: "auto"}}>{summary.numOfOpportunityDistricts}</TableCell>}
                     </TableRow>
                     <TableRow>
                         <TableCell sx={{margin: "auto"}}>Number of Safe Districts</TableCell>
-                        {/*<TableCell sx={{margin: "auto"}}>{summary.avgRepDemSplit}</TableCell>*/}
-                        <TableCell sx={{margin: "auto"}}>{1}</TableCell>
+                        {summary && <TableCell sx={{margin: "auto"}}>{summary.numOfSafeDistricts}</TableCell>}
                     </TableRow>
                     <TableRow>
                         <TableCell sx={{margin: "auto"}}>Polsby Popper Compactness Score of Each District</TableCell>
-                        {/*<TableCell sx={{margin: "auto"}}>{summary.avgRepDemSplit}</TableCell>*/}
-                        <TableCell sx={{margin: "auto"}}>{1}</TableCell>
+                        {summary && <TableCell sx={{margin: "auto"}}>{summary.polsbyPopperCompactnessScore}</TableCell>}
                     </TableRow>
                 </TableBody>
             </Table>

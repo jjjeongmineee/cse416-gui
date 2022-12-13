@@ -2,7 +2,7 @@ import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import Box from "@mui/material/Box";
 import React from "react";
 import {PlanType} from "../data/constants";
-import {useRecoilState, useRecoilValue} from "recoil";
+import {useRecoilState} from "recoil";
 import {planTypeAtom} from "../atom";
 
 export default function DistrictPlanTypeSelector() {

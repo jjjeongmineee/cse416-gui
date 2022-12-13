@@ -1,30 +1,35 @@
-import React, {useEffect} from "react";
-import {useRecoilState, useRecoilValue} from "recoil";
-import {districtPlanListAtom, planTypeAtom, stateNameAtom} from "../atom";
-import {PlanType} from "../data/constants";
-import axios from "axios";
-import Data from "../data/Data";
-import {SmdTabGroup} from "./SmdTabGroup";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Box from "@mui/material/Box";
+import {a11yProps, TabPanel} from "./TabPanel";
+import {useRecoilState} from "recoil";
+import {smdPlanIdxAtom} from "../atom";
+import {DistrictPlanTable} from "./DistrictPlanTable";
 
-export function SmdTabPanels() {
-    const stateName = useRecoilValue(stateNameAtom);
-    const planType = useRecoilValue(planTypeAtom);
-    const [districtPlanList, setDistrictPlanList] = useRecoilState(districtPlanListAtom);
+export function SmdTabPanels({districtPlanList}) {
+    const [smdPlanIdx, setSmdPlanIdx] = useRecoilState(smdPlanIdxAtom);
 
-    useEffect(() => {
-        const planTypeCode = planType === PlanType.SMD ? 'smd' : 'mmd';
-        axios.get("http://localhost:8080/muze/data/states/" + Data[stateName].postal + "/" + planTypeCode + "/plans")
-            .then((res) => {
-                setDistrictPlanList(res.data);
-            })
-            .catch(e => {
-                console.log(e)
-            });
-    }, [planType]);
+    const handleChange = (event, newValue) => {
+        setSmdPlanIdx(newValue);
+    }
 
     return (
-        <div hidden={planType !== PlanType.SMD}>
-            <SmdTabGroup districtPlanList={districtPlanList}/>
+        <div>
+            <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
+                <Tabs value={smdPlanIdx} onChange={handleChange} aria-label="data tabs">
+                    {districtPlanList.length > 0 && districtPlanList.map((p, idx) => {
+                        return (
+                            <Tab key={`SmdTab${idx}`} label={p.planName} sx={{margin: "auto"}} {...a11yProps(idx)}/>);
+                    })}
+                </Tabs>
+            </Box>
+            {districtPlanList.length > 0 && districtPlanList.map((p, idx) => {
+                return (
+                    <TabPanel key={`SmdTabPanel${idx}`} value={smdPlanIdx} index={idx}>
+                        <DistrictPlanTable summary={p.summary}/>
+                    </TabPanel>
+                );
+            })}
         </div>
     );
 }

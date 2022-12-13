@@ -47,10 +47,9 @@ export default Data = {
         postal: 'MS'
     },
     'Georgia': {
-        center: [32.657,-83.405],
+        center: [32.657, -83.405],
         zoom: 7,
         stateBounds: georgiaStateBounds,
         postal: 'GA'
     }
 };
-
