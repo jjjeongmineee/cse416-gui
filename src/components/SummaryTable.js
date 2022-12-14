@@ -8,8 +8,8 @@ import TableBody from "@mui/material/TableBody";
 import React from "react";
 import {useRecoilValue} from "recoil";
 import {districtEnsembleSummaryAtom, planTypeAtom} from "../atom";
-import {Card, CardContent, CardHeader} from "@mui/material";
-import {PlanType} from "../data/constants";
+import {Card, CardContent, CardHeader, CardMedia} from "@mui/material";
+import splits from "../data/images/Splits.png";
 
 export default function SummaryTable() {
     const planType = useRecoilValue(planTypeAtom);
@@ -63,6 +63,12 @@ export default function SummaryTable() {
             {/*        <p>5</p>*/}
             {/*    </CardContent>*/}
             {/*</Card>*/}
+            <Card sx={{height: '100%', width: '100%', marginBottom: "50px"}}>
+                <CardMedia
+                    component="img"
+                    image={splits}
+                />
+            </Card>
         </div>
     );
 }
