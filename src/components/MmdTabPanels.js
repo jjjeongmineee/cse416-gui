@@ -26,7 +26,7 @@ export function MmdTabPanels({districtPlanList}) {
             {districtPlanList.length > 0 && districtPlanList.map((p, idx) => {
                 return (
                     <TabPanel key={`MmdTabPanel${idx}`} value={mmdPlanIdx} index={idx}>
-                        <DistrictPlanTable districtPlan={p.summary}/>
+                        <DistrictPlanTable summary={p.summary}/>
                     </TabPanel>
                 );
             })}
