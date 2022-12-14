@@ -15,6 +15,7 @@ import {stateNameAtom} from "../atom";
 import {BoxAndWhisker} from "../components/BoxAndWhisker";
 import SummaryTable from "../components/SummaryTable";
 import {SmdPlot} from "../components/SmdPlot";
+import {Reference} from "../components/Reference";
 
 export default function StatePage({stateName}) {
     const center = Data[stateName].center;
@@ -50,6 +51,7 @@ export default function StatePage({stateName}) {
                     <SmdPlot/>
                 </div>
             </div>
+            <Reference/>
         </div>
     );
 }
