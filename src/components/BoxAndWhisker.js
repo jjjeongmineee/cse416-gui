@@ -1,5 +1,6 @@
 import {Card, CardHeader, CardMedia} from "@mui/material";
-import aaPercent from "../data/images/aaPercent.png";
+import smd from "../data/images/SMD.png";
+import mmd from "../data/images/MMD.png";
 
 export function BoxAndWhisker() {
     return (
@@ -8,14 +9,14 @@ export function BoxAndWhisker() {
                 <CardHeader title="SMD"/>
                 <CardMedia
                     component="img"
-                    image={aaPercent}
+                    image={smd}
                 />
             </Card>
             <Card sx={{height: '100%', width: '100%', marginBottom: "50px"}}>
                 <CardHeader title="MMD"/>
                 <CardMedia
                     component="img"
-                    image={aaPercent}
+                    image={mmd}
                 />
             </Card>
             {/*<Card sx={{height: '100%', width: '100%', marginBottom: "50px"}}>*/}
