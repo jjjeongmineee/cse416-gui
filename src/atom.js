@@ -37,9 +37,14 @@ export const boundsSelector = selector({
         const boundsList = get(boundsAtom);
         return boundsList.map((b) => JSON.parse(b));
     }
-})
+});
 
 export const districtEnsembleSummaryAtom = atom({
     key: "districtEnsembleSummaryAtom",
     default: null
-})
+});
+
+export const isResetAtom = atom({
+    key: "isResetAtom",
+    default: false
+});

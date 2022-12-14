@@ -6,6 +6,7 @@ import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
 import {
     districtEnsembleSummaryAtom,
     districtPlanListAtom,
+    isResetAtom,
     mmdPlanIdxAtom,
     planTypeAtom,
     smdPlanIdxAtom,
@@ -23,6 +24,7 @@ export default function DistrictPlanInformationTabs() {
     const setMmdPlanIdx = useSetRecoilState(mmdPlanIdxAtom);
     const setDistrictPlanList = useSetRecoilState(districtPlanListAtom);
     const setDistrictEnsembleSummaryAtom = useSetRecoilState(districtEnsembleSummaryAtom);
+    const setIsReset = useSetRecoilState(isResetAtom);
 
     useMemo(() => {
         const planTypeCode = planType === PlanType.SMD ? 'smd' : 'mmd';
@@ -37,6 +39,7 @@ export default function DistrictPlanInformationTabs() {
     }, [planType]);
 
     const handleReset = () => {
+        setIsReset(true);
         setPlanType(PlanType.SMD);
         setSmdPlanIdx(0);
         setMmdPlanIdx(0);
