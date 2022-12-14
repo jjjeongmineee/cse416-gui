@@ -1,4 +1,4 @@
-import {atom} from "recoil";
+import {atom, selector} from "recoil";
 import {PlanType} from "./data/constants";
 
 export const planTypeAtom = atom({
@@ -27,9 +27,17 @@ export const mmdPlanIdxAtom = atom({
 });
 
 export const boundsAtom = atom({
-    key: "",
+    key: "boundsAtom",
     default: []
 });
+
+export const boundsSelector = selector({
+    key: "boundsSelector",
+    get: ({get}) => {
+        const boundsList = get(boundsAtom);
+        return boundsList.map((b) => JSON.parse(b));
+    }
+})
 
 export const districtEnsembleSummaryAtom = atom({
     key: "districtEnsembleSummaryAtom",

@@ -44,11 +44,11 @@ export default function SummaryTable() {
                             {summary && <TableCell sx={{margin: "auto"}}>{summary.avgEqualPopulationMeasure}</TableCell>}
                             {/*<TableCell sx={{margin: "auto"}}>{1}</TableCell>*/}
                         </TableRow>
-                        <TableRow>
-                            <TableCell sx={{margin: "auto"}}>Average Polsby-Popper Value</TableCell>
-                            {summary && <TableCell sx={{margin: "auto"}}>{summary.avgPolsbyPopperValue}</TableCell>}
-                            {/*<TableCell sx={{margin: "auto"}}>{1}</TableCell>*/}
-                        </TableRow>
+                        {/*<TableRow>*/}
+                        {/*    <TableCell sx={{margin: "auto"}}>Average Polsby-Popper Value</TableCell>*/}
+                        {/*    {summary && <TableCell sx={{margin: "auto"}}>{summary.avgPolsbyPopperValue}</TableCell>}*/}
+                        {/*    /!*<TableCell sx={{margin: "auto"}}>{1}</TableCell>*!/*/}
+                        {/*</TableRow>*/}
                         <TableRow>
                             <TableCell sx={{margin: "auto"}}>Average Republican/Democratic Split</TableCell>
                             {summary && <TableCell sx={{margin: "auto"}}>{summary.avgRepDemSplit}</TableCell>}

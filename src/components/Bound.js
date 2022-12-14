@@ -1,34 +1,39 @@
-import {useRecoilState, useRecoilValue} from "recoil";
-import {boundsAtom, districtPlanListAtom, mmdPlanIdxAtom, planTypeAtom, smdPlanIdxAtom} from "../atom";
-import {GeoJSON} from "react-leaflet";
-import React, {useMemo} from "react";
+import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
+import {boundsAtom, boundsSelector, districtPlanListAtom, mmdPlanIdxAtom, planTypeAtom, smdPlanIdxAtom} from "../atom";
+import React, {useEffect, useMemo, useRef} from "react";
 import {PlanType} from "../data/constants";
+import {GeoJSON} from "react-leaflet";
 
 export function Bound() {
-    const [bounds, setBounds] = useRecoilState(boundsAtom);
+    const setBounds = useSetRecoilState(boundsAtom);
     const planType = useRecoilValue(planTypeAtom);
     const districtPlanList = useRecoilValue(districtPlanListAtom);
     const smdPlanIdx = useRecoilValue(smdPlanIdxAtom);
     const mmdPlanIdx = useRecoilValue(mmdPlanIdxAtom);
+    const bounds = useRecoilValue(boundsSelector);
+    const geoJsonRef = useRef();
 
     useMemo(() => {
         if (districtPlanList && districtPlanList.length) {
             switch (planType) {
                 case PlanType.SMD:
-                    setBounds(districtPlanList[smdPlanIdx].bounds);
+                    setBounds(districtPlanList[smdPlanIdx].boundsList);
                     break;
                 case PlanType.MMD:
-                    setBounds(districtPlanList[mmdPlanIdx].bounds);
+                    setBounds(districtPlanList[mmdPlanIdx].boundsList);
                     break;
             }
         }
     }, [districtPlanList, smdPlanIdx, mmdPlanIdx]);
 
+    useEffect(() => {
+        if (geoJsonRef.current){
+            geoJsonRef.current.clearLayers()   // remove old data
+            geoJsonRef.current.addData(bounds) // might need to be geojson.features
+        }
+    }, [geoJsonRef, bounds])
+
     return (
-        bounds.length > 0 && bounds.map((b) => {
-            return (
-                <GeoJSON data={JSON.parse(b)} style={{weight: 1}}/>
-            );
-        })
+        bounds.length > 0  && <GeoJSON ref={geoJsonRef} data={bounds} style={{weight: 1}}/>
     );
 }
