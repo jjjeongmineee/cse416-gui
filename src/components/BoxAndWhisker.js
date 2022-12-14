@@ -6,14 +6,14 @@ export function BoxAndWhisker() {
     return (
         <div>
             <Card sx={{height: '100%', width: '100%', marginBottom: "50px"}}>
-                <CardHeader title="SMD"/>
+                <CardHeader title="SMD (Republican distribution)"/>
                 <CardMedia
                     component="img"
                     image={smd}
                 />
             </Card>
             <Card sx={{height: '100%', width: '100%', marginBottom: "50px"}}>
-                <CardHeader title="MMD"/>
+                <CardHeader title="MMD (Republican distribution)"/>
                 <CardMedia
                     component="img"
                     image={mmd}
