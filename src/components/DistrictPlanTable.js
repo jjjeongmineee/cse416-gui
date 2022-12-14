@@ -5,8 +5,12 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
+import {useRecoilValue} from "recoil";
+import {planTypeAtom} from "../atom";
+import {PlanType} from "../data/constants";
 
 export function DistrictPlanTable({summary}) {
+    const planType = useRecoilValue(planTypeAtom)
     return (
         <TableContainer component={Paper}>
             <Table sx={{minWidth: 500}} aria-label="simple table">
@@ -22,6 +26,10 @@ export function DistrictPlanTable({summary}) {
                     <TableRow>
                         <TableCell sx={{margin: "auto"}}>Number of Districts</TableCell>
                         {summary && <TableCell sx={{margin: "auto"}}>{summary.numOfDistricts}</TableCell>}
+                    </TableRow>
+                    <TableRow hidden={planType !== PlanType.MMD}>
+                        {planType === PlanType.MMD && <TableCell sx={{margin: "auto"}}>Number of Representative</TableCell>}
+                        {planType === PlanType.MMD && summary && <TableCell sx={{margin: "auto"}}>3, 3, 4, 4</TableCell>}
                     </TableRow>
                     {/*<TableRow>*/}
                     {/*    <TableCell sx={{margin: "auto"}}>Summary of Each District in the Plan</TableCell>*/}

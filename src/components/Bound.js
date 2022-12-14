@@ -1,4 +1,4 @@
-import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
+import {useRecoilValue, useSetRecoilState} from "recoil";
 import {boundsAtom, boundsSelector, districtPlanListAtom, mmdPlanIdxAtom, planTypeAtom, smdPlanIdxAtom} from "../atom";
 import React, {useEffect, useMemo, useRef} from "react";
 import {PlanType} from "../data/constants";
@@ -27,13 +27,15 @@ export function Bound() {
     }, [districtPlanList, smdPlanIdx, mmdPlanIdx]);
 
     useEffect(() => {
-        if (geoJsonRef.current){
+        if (geoJsonRef.current) {
             geoJsonRef.current.clearLayers()   // remove old data
             geoJsonRef.current.addData(bounds) // might need to be geojson.features
         }
     }, [geoJsonRef, bounds])
 
     return (
-        bounds.length > 0  && <GeoJSON ref={geoJsonRef} data={bounds} style={{weight: 1}}/>
+        <div>
+            bounds.length > 0 && <GeoJSON ref={geoJsonRef} data={bounds} style={{weight: 1}}/>
+        </div>
     );
 }

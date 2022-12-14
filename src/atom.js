@@ -48,3 +48,8 @@ export const isResetAtom = atom({
     key: "isResetAtom",
     default: false
 });
+
+export const isOverlapAtom = atom({
+    key: "isOverlapAtom",
+    default: false
+})
