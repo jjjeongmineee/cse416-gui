@@ -6,7 +6,7 @@ import HomeIcon from '@mui/icons-material/Home'
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import {Menu, MenuItem, Tooltip} from "@mui/material";
+import {Button, Menu, MenuItem, Tooltip} from "@mui/material";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import axios from "axios";
 
@@ -41,6 +41,10 @@ export default function Banner(props) {
         window.location.reload();
     };
 
+    const handleClickReferences = (event) => {
+        navigate("/references");
+    }
+
     return (
         <Box>
             <AppBar position='static'>
@@ -52,6 +56,8 @@ export default function Banner(props) {
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         {props.title}
                     </Typography>
+                    <Button sx={{display: 'flex', alignItems: 'flex-end', color: 'white', mr: 2}}
+                            onClick={handleClickReferences}>References</Button>
                     <Box sx={{display: 'flex', alignItems: 'flex-end', padding: '0px 0px 8px 0px'}}>
                         <Tooltip title="Select a state">
                             <IconButton onClick={handleOpenStateMenu} sx={{p: 0}}>

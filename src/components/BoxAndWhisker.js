@@ -18,13 +18,13 @@ export function BoxAndWhisker() {
                     image={aaPercent}
                 />
             </Card>
-            <Card sx={{height: '100%', width: '100%', marginBottom: "50px"}}>
-                <CardHeader title="Both"/>
-                <CardMedia
-                    component="img"
-                    image={aaPercent}
-                />
-            </Card>
+            {/*<Card sx={{height: '100%', width: '100%', marginBottom: "50px"}}>*/}
+            {/*    <CardHeader title="Both"/>*/}
+            {/*    <CardMedia*/}
+            {/*        component="img"*/}
+            {/*        image={aaPercent}*/}
+            {/*    />*/}
+            {/*</Card>*/}
         </div>
     );
 }

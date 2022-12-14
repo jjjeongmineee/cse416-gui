@@ -1,11 +1,12 @@
 import Box from "@mui/material/Box";
 import {Card} from "@mui/material";
+import Banner from "../components/Banner";
 
 export function Reference() {
     return (
         <div>
-            <Card sx={{marginLeft: "50px", marginRight: "50px", padding: "20px"}}>
-                <h2>References</h2>
+            <Banner title='References'/>
+            <Card sx={{margin: "50px", padding: "20px"}}>
                 <h3>[Georgia]</h3>
                 <h4>Current</h4>
                 <ul>
