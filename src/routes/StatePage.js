@@ -39,7 +39,7 @@ export default function StatePage({stateName}) {
                 <div className='contentRoot'>
                     <Card sx={{height: '100%', width: '100%'}}>
                         <CardContent sx={{width: '100%', height: '100%', display: 'flex', flexDirection: 'column'}}>
-                            <OverlapButton/>
+                            {/*<OverlapButton/>*/}
                             <Box sx={{width: '100%', height: '100%'}} className='mapWrapper'>
                                 <MapContainer center={center} zoom={zoom} scrollWheelZoom={true} ref={mapRef}>
                                     <TileLayer
