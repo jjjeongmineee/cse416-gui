@@ -28,7 +28,7 @@ export const mmdPlanIdxAtom = atom({
 
 export const boundsAtom = atom({
     key: "",
-    default: null
+    default: []
 });
 
 export const districtEnsembleSummaryAtom = atom({

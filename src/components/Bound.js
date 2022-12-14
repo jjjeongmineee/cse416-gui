@@ -15,16 +15,20 @@ export function Bound() {
         if (districtPlanList && districtPlanList.length) {
             switch (planType) {
                 case PlanType.SMD:
-                    setBounds(JSON.parse(districtPlanList[smdPlanIdx].bounds));
+                    setBounds(districtPlanList[smdPlanIdx].bounds);
                     break;
                 case PlanType.MMD:
-                    setBounds(JSON.parse(districtPlanList[mmdPlanIdx].bounds));
+                    setBounds(districtPlanList[mmdPlanIdx].bounds);
                     break;
             }
         }
     }, [districtPlanList, smdPlanIdx, mmdPlanIdx]);
 
     return (
-        bounds && <GeoJSON data={bounds} style={{weight: 1}}/>
+        bounds.length > 0 && bounds.map((b) => {
+            return (
+                <GeoJSON data={JSON.parse(b)} style={{weight: 1}}/>
+            );
+        })
     );
 }

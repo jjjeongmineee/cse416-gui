@@ -29,6 +29,8 @@ export default function DistrictPlanInformationTabs() {
         axios.get("http://localhost:8080/muze/data/states/" + Data[stateName].postal + "/" + planTypeCode + "/plans")
             .then((res) => {
                 setDistrictPlanList(res.data.districtPlanList);
+                console.log(res.data.districtPlanList[0]);
+                console.log(res.data.districtPlanList[1]);
                 setDistrictEnsembleSummaryAtom(res.data.ensembleSummary);
             })
             .catch(e => {
