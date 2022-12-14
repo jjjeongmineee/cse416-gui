@@ -23,19 +23,19 @@ export function DistrictPlanTable({summary}) {
                         <TableCell sx={{margin: "auto"}}>Number of Districts</TableCell>
                         {summary && <TableCell sx={{margin: "auto"}}>{summary.numOfDistricts}</TableCell>}
                     </TableRow>
-                    <TableRow>
-                        <TableCell sx={{margin: "auto"}}>Summary of Each District in the Plan</TableCell>
-                        {summary &&
-                            <TableCell sx={{margin: "auto"}}>{summary.summaryOfEachDistrictInThePlan}</TableCell>}
-                    </TableRow>
+                    {/*<TableRow>*/}
+                    {/*    <TableCell sx={{margin: "auto"}}>Summary of Each District in the Plan</TableCell>*/}
+                    {/*    {summary &&*/}
+                    {/*        <TableCell sx={{margin: "auto"}}>{summary.summaryOfEachDistrictInThePlan}</TableCell>}*/}
+                    {/*</TableRow>*/}
                     <TableRow>
                         <TableCell sx={{margin: "auto"}}>Republican/Democratic Split</TableCell>
                         {summary && <TableCell sx={{margin: "auto"}}>{summary.repDemSplit}</TableCell>}
                     </TableRow>
-                    <TableRow>
-                        <TableCell sx={{margin: "auto"}}>Election from which Voting Preference is used</TableCell>
-                        {summary && <TableCell sx={{margin: "auto"}}>{summary.election}</TableCell>}
-                    </TableRow>
+                    {/*<TableRow>*/}
+                    {/*    <TableCell sx={{margin: "auto"}}>Election from which Voting Preference is used</TableCell>*/}
+                    {/*    {summary && <TableCell sx={{margin: "auto"}}>{summary.election}</TableCell>}*/}
+                    {/*</TableRow>*/}
                     <TableRow>
                         <TableCell sx={{margin: "auto"}}>Number of Opportunity Districts</TableCell>
                         {summary && <TableCell sx={{margin: "auto"}}>{summary.numOfOpportunityDistricts}</TableCell>}

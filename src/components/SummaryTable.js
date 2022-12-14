@@ -57,12 +57,12 @@ export default function SummaryTable() {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <Card hidden={planType !== PlanType.MMD}>
-                <CardHeader title="Summary Layout"/>
-                <CardContent>
-                    <p>5</p>
-                </CardContent>
-            </Card>
+            {/*<Card hidden={planType !== PlanType.MMD}>*/}
+            {/*    <CardHeader title="Summary Layout"/>*/}
+            {/*    <CardContent>*/}
+            {/*        <p>5</p>*/}
+            {/*    </CardContent>*/}
+            {/*</Card>*/}
         </div>
     );
 }
