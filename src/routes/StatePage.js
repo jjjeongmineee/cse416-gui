@@ -6,7 +6,7 @@ import React, {useEffect, useRef} from 'react';
 import Banner from '../components/Banner.js';
 import {Card, CardContent} from "@mui/material";
 import Box from "@mui/material/Box";
-import Data from "../data/Data";
+import {Data} from "../data/Data";
 import {MapContainer, TileLayer} from "react-leaflet";
 import {Bound} from "../components/Bound";
 import DistrictPlanInformationTabs from "../components/DistrictPlanInformationTabs";
@@ -39,7 +39,7 @@ export default function StatePage({stateName}) {
                 <div className='contentRoot'>
                     <Card sx={{height: '100%', width: '100%'}}>
                         <CardContent sx={{width: '100%', height: '100%', display: 'flex', flexDirection: 'column'}}>
-                            {/*<OverlapButton/>*/}
+                            <OverlapButton/>
                             <Box sx={{width: '100%', height: '100%'}} className='mapWrapper'>
                                 <MapContainer center={center} zoom={zoom} scrollWheelZoom={true} ref={mapRef}>
                                     <TileLayer

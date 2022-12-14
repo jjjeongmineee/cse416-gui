@@ -1,8 +1,17 @@
 import {useRecoilValue, useSetRecoilState} from "recoil";
-import {boundsAtom, boundsSelector, districtPlanListAtom, mmdPlanIdxAtom, planTypeAtom, smdPlanIdxAtom} from "../atom";
+import {
+    boundsAtom,
+    boundsSelector,
+    districtPlanListAtom,
+    isOverlapAtom,
+    mmdPlanIdxAtom,
+    planTypeAtom,
+    smdPlanIdxAtom
+} from "../atom";
 import React, {useEffect, useMemo, useRef} from "react";
 import {PlanType} from "../data/constants";
 import {GeoJSON} from "react-leaflet";
+import {current} from "../data/Data";
 
 export function Bound() {
     const setBounds = useSetRecoilState(boundsAtom);
@@ -12,6 +21,8 @@ export function Bound() {
     const mmdPlanIdx = useRecoilValue(mmdPlanIdxAtom);
     const bounds = useRecoilValue(boundsSelector);
     const geoJsonRef = useRef();
+    const curJsonRef = useRef();
+    const isOverlap = useRecoilValue(isOverlapAtom);
 
     useMemo(() => {
         if (districtPlanList && districtPlanList.length) {
@@ -35,7 +46,8 @@ export function Bound() {
 
     return (
         <div>
-            bounds.length > 0 && <GeoJSON ref={geoJsonRef} data={bounds} style={{weight: 1}}/>
+            {bounds.length > 0 && <GeoJSON ref={geoJsonRef} data={bounds} style={{weight: 1}}/>}
+            {isOverlap && <GeoJSON ref={curJsonRef} data={current.bounds} style={{weight: 1, color: 'green'}}/>}
         </div>
     );
 }

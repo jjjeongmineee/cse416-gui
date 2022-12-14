@@ -15,7 +15,7 @@ import {
 import {SmdTabCore} from "./SmdTabCore";
 import {MmdTabCore} from "./MmdTabCore";
 import axios from "axios";
-import Data from "../data/Data";
+import {Data} from "../data/Data";
 
 export default function DistrictPlanInformationTabs() {
     const stateName = useRecoilValue(stateNameAtom);

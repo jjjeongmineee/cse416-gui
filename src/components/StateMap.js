@@ -1,7 +1,7 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import {GeoJSON, MapContainer, TileLayer} from "react-leaflet";
-import Data from "../data/Data";
+import {Data} from "../data/Data";
 import {titleCase} from "../Utils";
 import React from "react";
 import {useNavigate} from "react-router-dom";

@@ -19,9 +19,9 @@ import mississippiDistrictBounds from './geojson/mississippiDistrictBounds.json'
 
 // georgia data
 import georgiaStateBounds from './geojson/georgiaStateBounds.json';
+import bounds from './geojson/GA.json';
 
-var Data;
-export default Data = {
+export const Data = {
     'Louisiana': {
         center: [30.58, -92.32],
         zoom: 7,
@@ -53,3 +53,7 @@ export default Data = {
         postal: 'GA'
     }
 };
+
+export const current = {
+    bounds: bounds
+}
